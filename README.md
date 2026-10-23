@@ -37,7 +37,7 @@ Testdata i `test/fixtures` er opdigtede priser i samme format som Energi Data Se
 
 ## Netselskaber
 
-Listen står i `scripts/netselskaber.json` (GLN-nummer og tarifkode for nettarif C). Et netselskab uden gyldig tarif bliver automatisk sprunget over. Tarifkoderne stammer fra Home Assistant-integrationen [MTrab/energidataservice](https://github.com/MTrab/energidataservice).
+Listen står i `scripts/netselskaber.json` (GLN-nummer og tarifkode for nettarif C). Et netselskab bliver automatisk sprunget over, hvis der ikke findes en gyldig tarif, eller hvis tariffen ikke ligner en tidstarif (billigst om natten, dyrest kl. 17–21). Det sidste betyder som regel, at tarifkoden er forældet. Pr. oktober 2026 gælder det Aal El-Net, Elinord, FLOW Elnet, Forsyning Elnet og Ikast El Net. Tarifkoderne stammer fra Home Assistant-integrationen [MTrab/energidataservice](https://github.com/MTrab/energidataservice).
 
 ## Skrifttyper
 

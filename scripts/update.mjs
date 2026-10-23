@@ -142,8 +142,17 @@ async function main() {
       }
       if (fundet) tarif[d] = timer.map((v) => rund(v, 6));
     }
-    if (tarif[idag]) netselskaber.push({ id: ns.id, navn: ns.navn, omraade: ns.omraade, tarif });
-    else console.warn(`Ingen gyldig tarif i dag for ${ns.navn}, springer over`);
+    const t = tarif[idag];
+    if (!t) {
+      console.warn(`Ingen gyldig tarif i dag for ${ns.navn}, springer over`);
+    } else if (!(t[2] < t[8] && t[8] < t[18])) {
+      // Alle netselskaber skal bruge tidstarif (lav om natten, højest kl. 17-21).
+      // Ser tariffen anderledes ud, peger tarifkoden sandsynligvis på en forkert
+      // eller forældet tarif, og så er et forkert svar værre end intet svar.
+      console.warn(`Tariffen for ${ns.navn} ligner ikke en tidstarif (${t[2]}/${t[8]}/${t[18]}), springer over`);
+    } else {
+      netselskaber.push({ id: ns.id, navn: ns.navn, omraade: ns.omraade, tarif });
+    }
   }
   if (!netselskaber.length) throw new Error('Fandt ingen nettariffer');
 

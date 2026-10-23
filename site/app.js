@@ -116,7 +116,10 @@ function render() {
   const nuPris = priser[0];
 
   saet('svar', ja ? 'JA.' : 'NEJ.');
-  saet('note', 'Svaret skifter hvert kvarter.');
+  const kunIdag = lokal(alle[alle.length - 1].t).dato === lokal(nu).dato;
+  saet('note', kunIdag
+    ? 'Natten kendes først, når morgendagens priser kommer ved 13-tiden. Svaret kan ændre sig.'
+    : 'Svaret skifter hvert kvarter.');
 
   if (ja && nuPris.pris < 0) saet('under', 'De betaler dig. Helt ærligt.');
   else if (ja && nuPris.spot < 0) saet('under', 'De betaler dig. Næsten.');
