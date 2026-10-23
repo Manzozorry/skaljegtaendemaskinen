@@ -11,7 +11,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-ravdex-vask-en@skaljegtaendemaskinen
-DTSTAMP:20261023T121141Z
+DTSTAMP:20261023T121445Z
 DTSTART:20261023T103000Z
 DTEND:20261023T123000Z
 SUMMARY:Start the washing machine
@@ -19,12 +19,12 @@ DESCRIPTION:Cheapest 2 hours: 12:30–14:30.\nSaves 1.43 kr compared to sta
  rting at 7 pm.\nIf the machine has delay start\, set it to start at 12:30.
  \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
  markup).
-URL:https://skaljegtaendemaskinen.fun/
+URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-23-ravdex-vask-en@skaljegtaendemaskinen
-DTSTAMP:20261023T121141Z
+DTSTAMP:20261023T121445Z
 DTSTART:20261024T013000Z
 DTEND:20261024T033000Z
 SUMMARY:Start the washing machine
@@ -32,7 +32,7 @@ DESCRIPTION:Cheapest 2 hours: 03:30–05:30.\nSaves 1.21 kr compared to sta
  rting at 7 pm.\nIf the machine has delay start\, set it to start at 03:30.
  \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
  markup).
-URL:https://skaljegtaendemaskinen.fun/
+URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
