@@ -74,17 +74,22 @@ async function hentData() {
 function byggeValg() {
   const net = $('netselskab');
   net.innerHTML = '';
+  // Først de to gennemsnit (kræver kun, at man ved, hvilken side af Storebælt man bor),
+  // derefter de enkelte netselskaber for dem, der vil have det præcise svar.
+  for (const ns of data.netselskaber.filter((n) => n.snit)) {
+    net.append(new Option(T['snit' + ns.omraade] || ns.navn, ns.id));
+  }
   for (const [omr, navn] of [['DK2', T.oest], ['DK1', T.vest]]) {
     const gruppe = document.createElement('optgroup');
     gruppe.label = navn;
-    for (const ns of data.netselskaber.filter((n) => n.omraade === omr)) {
+    for (const ns of data.netselskaber.filter((n) => n.omraade === omr && !n.snit)) {
       gruppe.append(new Option(ns.navn, ns.id));
     }
     if (gruppe.children.length) net.append(gruppe);
   }
   if (!valgtNet || !data.netselskaber.some((n) => n.id === valgtNet)) {
     $('gaet').hidden = false;
-    valgtNet = data.netselskaber.some((n) => n.id === 'radius') ? 'radius' : data.netselskaber[0].id;
+    valgtNet = ['dk2-snit', 'radius'].find((id) => data.netselskaber.some((n) => n.id === id)) || data.netselskaber[0].id;
   }
   net.value = valgtNet;
 
@@ -122,6 +127,8 @@ function render() {
   document.title = T.titel(mt.ord);
   const opd = Date.parse(data.opdateret);
   saet('opdateret', T.opdateret(fmt.dato.format(opd), klokken(opd)));
+  const valgt = data.netselskaber.find((x) => x.id === valgtNet);
+  saet('snitNote', valgt && valgt.snit ? T.snitNote : '');
 
   const alle = totalpriser(data, valgtNet);
   const i0 = indeksVed(alle, nu);
@@ -139,7 +146,7 @@ function render() {
     saet('enhedTekst', T.manglerPriser);
     saet('spar', '–');
     saet('sparHale', '');
-    tegnGraf(priser, null, n);
+    tegnGraf(priser, null, n, m);
     opdaterKalender(m);
     opdaterHistorik();
     return;
@@ -196,22 +203,27 @@ function render() {
     ? (ligegyldigt && bedst.i > 0 ? T.haleIngenting : T.halePaaFoer)
     : spar >= 5 ? T.haleNoget : T.haleLidt);
 
-  tegnGraf(priser, bedst, n);
+  tegnGraf(priser, bedst, n, m);
   opdaterKalender(m);
   opdaterHistorik();
 }
 
-function tegnGraf(priser, bedst, n) {
+// Tilstand for den interaktive graf
+const graf = { priser: [], vis: [], n: 0, m: null, bedst: null, valgt: -1 };
+
+function tegnGraf(priser, bedst, n, m) {
   const boks = $('soejler');
   const akse = $('akse');
   boks.innerHTML = '';
   akse.innerHTML = '';
-  if (!priser.length) {
+  Object.assign(graf, { priser, vis: priser.slice(0, 144), n, m, bedst });
+  const vis = graf.vis;
+  if (!vis.length) {
     saet('grafTitel', T.ingenPriser);
     saet('billigst', '');
+    ryd();
     return;
   }
-  const vis = priser.slice(0, 144);
   const max = Math.max(...vis.map((p) => p.pris));
   const min = Math.min(0, ...vis.map((p) => p.pris));
   boks.classList.toggle('taet', vis.length > 72);
@@ -221,7 +233,8 @@ function tegnGraf(priser, bedst, n) {
   vis.forEach((p, i) => {
     if (p.pris < billigst.pris) billigst = p;
     const d = document.createElement('div');
-    d.style.height = `${Math.max(2, ((p.pris - min) / (max - min || 1)) * 100)}%`;
+    // Højeste søjle fylder 72 %, så prisboksen har plads over den
+    d.style.height = `${Math.max(2, ((p.pris - min) / (max - min || 1)) * 72)}%`;
     if (bedst && i >= bedst.i && i < bedst.i + n) d.className = 'vindue';
     else if (i === 0) d.className = 'nu';
     boks.append(d);
@@ -239,12 +252,89 @@ function tegnGraf(priser, bedst, n) {
   const timer = Math.round(vis.length / 4);
   saet('grafTitel', T.grafTitel(timer));
   saet('billigst', T.billigst(belob(billigst.pris, sprog), tidTekst(billigst.t, nu, true)));
+  boks.setAttribute('aria-label', T.grafSlider);
+  boks.setAttribute('aria-valuemax', String(vis.length - 1));
   if (bedst) {
     saet('vindueTekst', T.vindue(n / 4, klokken(bedst.start), klokken(bedst.slut)));
-    boks.setAttribute('aria-label', T.grafAria(timer, belob(billigst.pris, sprog), n / 4, klokken(bedst.start), klokken(bedst.slut)));
+    saet('grafResume', T.grafAria(timer, belob(billigst.pris, sprog), n / 4, klokken(bedst.start), klokken(bedst.slut)));
   } else {
     saet('vindueTekst', T.vindueStandard);
+    saet('grafResume', '');
   }
+  if (graf.valgt >= 0) markeer(graf.valgt);
+}
+
+// Vis pris og "hvad koster det at starte her" for kvarter i.
+function markeer(i) {
+  const { priser, vis, n, m } = graf;
+  if (!vis.length || !m) return;
+  i = Math.max(0, Math.min(vis.length - 1, i));
+  graf.valgt = i;
+  const boks = $('soejler');
+  boks.classList.add('peger');
+  const soejler = boks.children;
+  for (let k = 0; k < soejler.length; k++) {
+    soejler[k].classList.toggle('proeve', k >= i && k < i + n);
+    soejler[k].classList.toggle('markoer', k === i);
+  }
+  const p = vis[i];
+  const prisTekst = T.tipPris(`${fmt.ugedag.format(p.t)} ${klokken(p.t)}`, belob(p.pris, sprog));
+  const g = snit(priser, i, n);
+  const bedstKr = graf.bedst && graf.bedst.i !== i ? belob(graf.bedst.snit * m.kwh, sprog) : null;
+  const koster = g === null ? T.tipForSent : T.tipKoster(m2(m).ord, belob(g * m.kwh, sprog), bedstKr);
+  saet('tipPris', prisTekst);
+  saet('tipKoster', koster);
+
+  const tip = $('tip');
+  tip.hidden = false;
+  const bredde = boks.clientWidth;
+  const hoejde = boks.clientHeight;
+  const x = ((i + 0.5) / vis.length) * bredde;
+  const tw = tip.offsetWidth;
+  const th = tip.offsetHeight;
+  const soejleTop = hoejde - soejler[i].offsetHeight;
+  tip.style.left = `${Math.max(0, Math.min(bredde - tw, x - tw / 2))}px`;
+  tip.style.top = `${Math.max(0, soejleTop - th - 8)}px`;
+  boks.setAttribute('aria-valuenow', String(i));
+  boks.setAttribute('aria-valuetext', `${prisTekst}. ${koster}`);
+}
+
+function ryd() {
+  graf.valgt = -1;
+  const boks = $('soejler');
+  boks.classList.remove('peger');
+  for (const s of boks.children) s.classList.remove('proeve', 'markoer');
+  $('tip').hidden = true;
+}
+
+function grafStyring() {
+  const boks = $('soejler');
+  const indeks = (e) => {
+    const r = boks.getBoundingClientRect();
+    return Math.floor(((e.clientX - r.left) / r.width) * graf.vis.length);
+  };
+  boks.addEventListener('pointerdown', (e) => markeer(indeks(e)));
+  boks.addEventListener('pointermove', (e) => markeer(indeks(e)));
+  boks.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') ryd(); });
+  document.addEventListener('pointerdown', (e) => { if (!boks.contains(e.target)) ryd(); });
+  boks.addEventListener('focus', () => { if (graf.valgt < 0) markeer(0); });
+  boks.addEventListener('blur', ryd);
+  boks.addEventListener('keydown', (e) => {
+    const len = graf.vis.length;
+    if (!len) return;
+    const i = graf.valgt < 0 ? 0 : graf.valgt;
+    const skridt = e.shiftKey ? 4 : 1;
+    const nyt = {
+      ArrowRight: i + skridt, ArrowUp: i + skridt,
+      ArrowLeft: i - skridt, ArrowDown: i - skridt,
+      PageUp: i + 4, PageDown: i - 4,
+      Home: 0, End: len - 1
+    }[e.key];
+    if (e.key === 'Escape') { ryd(); return; }
+    if (nyt === undefined) return;
+    e.preventDefault();
+    markeer(nyt);
+  });
 }
 
 function opdaterKalender(m) {
@@ -252,7 +342,8 @@ function opdaterKalender(m) {
   const https = new URL(sti, location.href).href;
   const webcal = https.replace(/^https?:/, 'webcal:');
   const ns = data.netselskaber.find((x) => x.id === valgtNet);
-  const navn = `${m2(m).kalender} · ${ns ? ns.navn : ''}`;
+  const nsNavn = ns ? (ns.navne ? ns.navne[sprog] : ns.navn) : '';
+  const navn = `${m2(m).kalender} · ${nsNavn}`;
   $('kalGoogle').href = `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}`;
   $('kalOutlook').href = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(https)}&name=${encodeURIComponent(navn)}`;
   $('kalIphone').href = webcal;
@@ -283,6 +374,7 @@ async function start() {
   }
   byggeValg();
   render();
+  grafStyring();
 
   $('netselskab').addEventListener('change', (e) => {
     valgtNet = e.target.value;

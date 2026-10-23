@@ -156,6 +156,25 @@ async function main() {
   }
   if (!netselskaber.length) throw new Error('Fandt ingen nettariffer');
 
+  // Gennemsnit pr. prisområde for dem, der ikke kender deres netselskab
+  const gennemsnit = [];
+  for (const [omr, id, da, en] of [
+    ['DK2', 'dk2-snit', 'Øst for Storebælt (gennemsnit)', 'Zealand and Copenhagen (average)'],
+    ['DK1', 'dk1-snit', 'Vest for Storebælt (gennemsnit)', 'Jutland and Funen (average)']
+  ]) {
+    const gruppe = netselskaber.filter((n) => n.omraade === omr);
+    if (!gruppe.length) continue;
+    const tarif = {};
+    for (const d of datoer) {
+      const med = gruppe.filter((n) => n.tarif[d]);
+      if (!med.length) continue;
+      tarif[d] = Array.from({ length: 24 }, (_, h) =>
+        rund(med.reduce((s, n) => s + n.tarif[d][h], 0) / med.length, 6));
+    }
+    gennemsnit.push({ id, navn: da, navne: { da, en }, omraade: omr, snit: true, antal: gruppe.length, tarif });
+  }
+  netselskaber.unshift(...gennemsnit);
+
   const data = {
     opdateret: new Date(NU).toISOString(),
     kilde: 'Energi Data Service (Energinet): DayAheadPrices og DatahubPricelist',
@@ -262,13 +281,14 @@ function kalender(ns, m, begivenheder, sprog) {
   const timer = m.kvarterer / 4;
   const k = KAL[sprog];
   const navn = m[sprog].kalender;
+  const nsNavn = ns.navne ? ns.navne[sprog] : ns.navn;
   const linjer = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     `PRODID:-//${DOMAENE}//${sprog.toUpperCase()}`,
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
-    `X-WR-CALNAME:${tekst(`${navn} · ${ns.navn}`)}`,
+    `X-WR-CALNAME:${tekst(`${navn} · ${nsNavn}`)}`,
     `X-WR-CALDESC:${tekst(k.beskrivelse)}`,
     'X-WR-TIMEZONE:Europe/Copenhagen',
     'REFRESH-INTERVAL;VALUE=DURATION:PT4H',

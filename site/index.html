@@ -57,8 +57,13 @@
       <span class="etiket" id="grafTitel">Pris · kr/kWh</span>
       <span id="billigst"></span>
     </div>
-    <div class="soejler" id="soejler" role="img" aria-label="Elprisen pr. kvarter"></div>
+    <p class="sr-only" id="grafResume"></p>
+    <div class="graf-omraade">
+      <div class="tip" id="tip" hidden><b id="tipPris"></b><span id="tipKoster"></span></div>
+      <div class="soejler" id="soejler" tabindex="0" role="slider" aria-label="Vælg et tidspunkt i grafen" aria-describedby="grafResume" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></div>
+    </div>
     <div class="akse" id="akse" aria-hidden="true"></div>
+    <p class="graf-hint" id="grafHint" data-t="grafHint">Peg eller tryk på grafen for at se prisen på et bestemt tidspunkt.</p>
     <div class="forklaring">
       <span><i style="background: var(--accent)"></i><span id="vindueTekst" data-t="vindueStandard">Billigste vindue</span></span>
       <span><i style="background: var(--soejle-nu)"></i><span data-t="nu">Nu</span></span>
@@ -89,7 +94,7 @@
 </main>
 
 <footer>
-  <p><span data-t="kildeFoer">Priser fra Energi Data Service (Energinet), opdateret </span><span id="opdateret">–</span><span data-t="kildeEfter">. Inkl. spotpris, nettarif C fra dit netselskab, elafgift, Energinets tariffer og moms. Ekskl. dit elselskabs tillæg og abonnementer.</span></p>
+  <p><span data-t="kildeFoer">Priser fra Energi Data Service (Energinet), opdateret </span><span id="opdateret">–</span><span data-t="kildeEfter">. Inkl. spotpris, nettarif C fra dit netselskab, elafgift, Energinets tariffer og moms. Ekskl. dit elselskabs tillæg og abonnementer.</span><span id="snitNote"></span></p>
   <p id="antagelser"></p>
   <p><span data-t="lavetAf">Lavet af en person med en opvaskemaskine. </span><a href="https://github.com/Manzozorry/skaljegtaendemaskinen" data-t="github">Koden ligger på GitHub.</a></p>
 </footer>
