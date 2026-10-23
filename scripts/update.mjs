@@ -2,7 +2,7 @@
 // Henter dagens og morgendagens elpriser, nettariffer og afgifter fra
 // Energi Data Service (Energinet) og skriver:
 //   site/data/latest.json   – data til siden
-//   site/data/historik.json – hvad opvaskeren har sparet siden start
+//   site/data/historik.json – hvad hver maskine har sparet siden start
 //   site/cal/<netselskab>-<maskine>.ics – kalenderabonnementer
 //
 // Kør:  node scripts/update.mjs
@@ -188,20 +188,23 @@ async function main() {
   await mkdir(join(SITE, 'cal', 'en'), { recursive: true });
   await writeFile(join(SITE, 'data/latest.json'), JSON.stringify(data));
 
-  // 4. Kalendere og "sparet siden"
-  const maskiner = JSON.parse(await readFile(join(SITE, 'maskiner.json'), 'utf8'));
-  const opvasker = maskiner.find((m) => m.id === 'opvasker');
+  // 4. Kalendere og "sparet siden" (begge bruger maskinens standardprogram)
+  const maskiner = JSON.parse(await readFile(join(SITE, 'maskiner.json'), 'utf8'))
+    .map((m) => ({ ...m, ...standardProgram(m) }));
   const historikSti = join(SITE, 'data/historik.json');
   let historik;
   try {
     historik = JSON.parse(await readFile(historikSti, 'utf8'));
   } catch {
-    historik = { siden: null, senest: {}, sum: {} };
+    historik = null;
   }
+  historik = tilHistorikV2(historik);
 
   let kalendere = 0;
   for (const ns of netselskaber) {
     const priser = totalpriser(data, ns.id);
+    historik.senest[ns.id] ??= {};
+    historik.sum[ns.id] ??= {};
 
     for (const m of maskiner) {
       const begivenheder = [];
@@ -212,22 +215,41 @@ async function main() {
       await writeFile(join(SITE, 'cal', `${ns.id}-${m.id}.ics`), kalender(ns, m, begivenheder, 'da'));
       await writeFile(join(SITE, 'cal', 'en', `${ns.id}-${m.id}.ics`), kalender(ns, m, begivenheder, 'en'));
       kalendere += 2;
-    }
 
-    // Læg hver aftens besparelse til én gang pr. dato
-    for (const d of datoer) {
-      if (historik.senest[ns.id] && historik.senest[ns.id] >= d) continue;
-      const v = aftenvindue(priser, d, opvasker.kvarterer);
-      if (!v) continue;
-      historik.sum[ns.id] = rund((historik.sum[ns.id] ?? 0) + (v.naiv - v.snit) * opvasker.kwh, 4);
-      historik.senest[ns.id] = d;
-      historik.siden ??= d;
+      // Læg hver aftens besparelse til én gang pr. dato
+      for (const d of datoer) {
+        const senest = historik.senest[ns.id][m.id];
+        if (senest && senest >= d) continue;
+        const v = aftenvindue(priser, d, m.kvarterer);
+        if (!v) continue;
+        historik.sum[ns.id][m.id] = rund((historik.sum[ns.id][m.id] ?? 0) + (v.naiv - v.snit) * m.kwh, 4);
+        historik.senest[ns.id][m.id] = d;
+        if (!historik.siden[m.id] || historik.siden[m.id] > d) historik.siden[m.id] = d;
+      }
     }
   }
   await writeFile(historikSti, JSON.stringify(historik, null, 1));
 
   const kvarterer = Object.fromEntries(Object.entries(omraader).map(([k, v]) => [k, v.kvarter.length]));
   console.log(`OK: ${netselskaber.length} netselskaber, kvarterer ${JSON.stringify(kvarterer)}, ${kalendere} kalendere`);
+}
+
+// Maskinens standardprogram (bruges til kalendere og "sparet siden")
+function standardProgram(m) {
+  const p = m.programmer.find((x) => x.id === m.standard) || m.programmer[0];
+  return { kvarterer: p.kvarterer, kwh: p.kwh };
+}
+
+// Første version gemte kun opvaskeren: { siden, senest: {ns: dato}, sum: {ns: kr} }
+function tilHistorikV2(h) {
+  if (h && h.v === 2) return h;
+  const ny = { v: 2, siden: {}, senest: {}, sum: {} };
+  if (h && h.siden) {
+    ny.siden.opvasker = h.siden;
+    for (const [ns, dato] of Object.entries(h.senest || {})) ny.senest[ns] = { opvasker: dato };
+    for (const [ns, kr] of Object.entries(h.sum || {})) ny.sum[ns] = { opvasker: kr };
+  }
+  return ny;
 }
 
 // --- iCalendar ---

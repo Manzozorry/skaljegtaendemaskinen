@@ -15,6 +15,8 @@ Svaret regnes ud fra de rigtige priser pr. kvarter: spotpris + nettarif fra dit 
 - `.github/workflows/opdater.yml` kører scriptet hver dag efter kl. 13, når morgendagens priser er udkommet, gemmer data i repoet og udgiver `site/` på GitHub Pages.
 - Siden (`site/`) er ren HTML, CSS og JavaScript. Ingen server, ingen cookies, ingen eksterne skrifttyper.
 - `site/beregn.js` bruges både af siden og af scriptet, så de regner ens.
+- Hver maskine har faste programmer i `site/maskiner.json` (varighed og kWh). Standardprogrammet bruges til kalendere og "sparet siden".
+- Man kan vælge "færdig senest" (kl. 07, 16 eller 22), sætte flueben i fast elpris (så tæller kun nettarif og afgifter) og dele svaret. Siden siger JA, hvis man sparer under 25 øre eller under 10 % ved at vente.
 - Siden findes på dansk og engelsk. Sproget vælges efter browseren, kan skiftes med DA/EN-knappen og kan tvinges med `?lang=en`. Alle tekster står i `site/tekster.js`, og kalenderne findes i `site/cal/` (dansk) og `site/cal/en/` (engelsk).
 
 ## Opsætning (én gang)

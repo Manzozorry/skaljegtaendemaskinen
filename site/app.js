@@ -6,6 +6,11 @@ import { tekster, belob } from './tekster.js';
 // Buy Me a Coffee-link til kilowatttime-knappen. Tom streng skjuler knappen.
 const KILOWATTTIME_LINK = 'https://www.buymeacoffee.com/manz';
 
+// Hvornår siden siger "JA, lad være med at vente": besparelsen er under
+// 25 øre eller under 10 % af hvad det koster at starte nu.
+const LIGEGYLDIGT_KR = 0.25;
+const LIGEGYLDIGT_ANDEL = 0.10;
+
 const $ = (id) => document.getElementById(id);
 const gem = {
   hent(k) { try { return localStorage.getItem(k); } catch { return null; } },
@@ -18,8 +23,11 @@ let historik = null;
 let sidstHentet = 0;
 let valgtNet = gem.hent('netselskab');
 let valgtMaskine = gem.hent('maskine') || 'opvasker';
+let valgtFrist = gem.hent('frist') || 'ingen';
+let fastElpris = gem.hent('fast') === '1';
 let sprog = vaelgSprog();
 let T = tekster[sprog];
+let sidsteSvar = null; // til del-knappen
 
 // ?lang=en i adressen > tidligere valg > browserens sprog
 function vaelgSprog() {
@@ -39,6 +47,7 @@ const fmt = {};
 function opdaterFormater() {
   fmt.dato = new Intl.DateTimeFormat(T.locale, { day: 'numeric', month: 'short', timeZone: 'Europe/Copenhagen' });
   fmt.ugedag = new Intl.DateTimeFormat(T.locale, { weekday: 'short', timeZone: 'Europe/Copenhagen' });
+  fmt.tal = new Intl.NumberFormat(T.locale, { maximumFractionDigits: 2 });
 }
 
 function anvendSprog() {
@@ -53,9 +62,17 @@ function anvendSprog() {
     knap.setAttribute('aria-pressed', String(knap.dataset.sprog === sprog));
   }
   $('maskine').setAttribute('aria-label', T.vaelgMaskine);
+  $('program').setAttribute('aria-label', T.vaelgProgram);
+  $('frist').setAttribute('aria-label', T.vaelgFrist);
+  for (const o of $('frist').options) o.textContent = T.frister[o.value];
 }
 
 const m2 = (m) => m[sprog] || m.da;
+
+function valgtProgram(m) {
+  const id = gem.hent('program-' + m.id) || m.standard;
+  return m.programmer.find((p) => p.id === id) || m.programmer.find((p) => p.id === m.standard) || m.programmer[0];
+}
 
 async function hentData() {
   const v = Math.floor(Date.now() / (5 * 60 * 1000));
@@ -98,8 +115,24 @@ function byggeValg() {
   if (!maskiner.some((m) => m.id === valgtMaskine)) valgtMaskine = maskiner[0].id;
   mask.value = valgtMaskine;
 
-  $('antagelser').textContent = T.antagelser(maskiner
-    .map((m) => T.antagelse(m2(m).navn, new Intl.NumberFormat(T.locale, { maximumFractionDigits: 2 }).format(m.kwh), m.kvarterer / 4))
+  if (!T.frister[valgtFrist]) valgtFrist = 'ingen';
+  $('frist').value = valgtFrist;
+  $('fast').checked = fastElpris;
+  byggeProgrammer();
+}
+
+function programTekst(p) {
+  return `${p[sprog] || p.da} · ${T.varighed(p.kvarterer)}`;
+}
+
+function byggeProgrammer() {
+  const m = maskiner.find((x) => x.id === valgtMaskine) || maskiner[0];
+  const sel = $('program');
+  sel.innerHTML = '';
+  for (const p of m.programmer) sel.append(new Option(programTekst(p), p.id));
+  sel.value = valgtProgram(m).id;
+  $('antagelser').textContent = T.antagelser(m2(m).navn, m.programmer
+    .map((p) => T.antagelse(p[sprog] || p.da, fmt.tal.format(p.kwh), T.varighed(p.kvarterer)))
     .join(', '));
 }
 
@@ -112,26 +145,45 @@ function tidTekst(ms, nu, medKl = false) {
   return T.ugedagKl(fmt.ugedag.format(ms), klokken(ms));
 }
 
+// Første gang klokken bliver hh:00, og maskinen kan nå at blive færdig før.
+// Infinity, hvis tidspunktet ligger efter de kendte priser (så gælder grænsen ikke).
+function fristTidspunkt(priser, nu, n) {
+  if (valgtFrist === 'ingen') return Infinity;
+  const time = Number(valgtFrist);
+  const tidligst = nu + n * KVARTER;
+  for (const p of priser) {
+    const l = lokal(p.t);
+    if (p.t >= tidligst && l.time === time && l.minut === 0) return p.t;
+  }
+  return Infinity;
+}
+
 function saet(id, tekst) { $(id).textContent = tekst; }
 
 function render() {
   if (!data) return;
   const m = maskiner.find((x) => x.id === valgtMaskine) || maskiner[0];
   const mt = m2(m);
-  const n = m.kvarterer;
-  const timer = n / 4;
+  const prog = valgtProgram(m);
+  const n = prog.kvarterer;
+  const kwh = prog.kwh;
   const nu = Date.now();
 
   saet('maskineord', mt.ord);
+  saet('forled', mt.forled);
+  saet('programTekst', programTekst(prog));
+  saet('fristTekst', T.frister[valgtFrist]);
   document.title = T.titel(mt.ord);
   const opd = Date.parse(data.opdateret);
   saet('opdateret', T.opdateret(fmt.dato.format(opd), klokken(opd)));
   const valgt = data.netselskaber.find((x) => x.id === valgtNet);
   saet('snitNote', valgt && valgt.snit ? T.snitNote : '');
+  $('fastNote').hidden = !fastElpris;
 
-  const alle = totalpriser(data, valgtNet);
+  const alle = totalpriser(data, valgtNet, { fast: fastElpris });
   const i0 = indeksVed(alle, nu);
   const priser = i0 >= 0 ? alle.slice(i0) : [];
+  const frist = fristTidspunkt(priser, nu, n);
 
   $('replik').hidden = !mt.replik;
   saet('replik', mt.replik || '');
@@ -145,17 +197,18 @@ function render() {
     saet('enhedTekst', T.manglerPriser);
     saet('spar', '–');
     saet('sparHale', '');
-    tegnGraf(priser, null, n, m);
+    sidsteSvar = null;
+    tegnGraf(priser, null, n, kwh, m, frist, false);
     opdaterKalender(m);
-    opdaterHistorik();
+    opdaterHistorik(m);
     return;
   }
 
-  const bedst = bedsteVindue(priser, n);
+  const bedst = bedsteVindue(priser, n, -Infinity, frist - n * KVARTER + 1) || bedsteVindue(priser, n);
   const nuSnit = snit(priser, 0, n);
-  const spar = Math.max(0, (nuSnit - bedst.snit) * m.kwh);
+  const spar = Math.max(0, (nuSnit - bedst.snit) * kwh);
   const vent = bedst.start - nu;
-  const ligegyldigt = spar < 0.05;
+  const ligegyldigt = bedst.i > 0 && (spar < LIGEGYLDIGT_KR || spar < LIGEGYLDIGT_ANDEL * nuSnit * kwh);
   const ja = bedst.i === 0 || vent < 10 * 60 * 1000 || ligegyldigt;
   const nuPris = priser[0];
 
@@ -166,32 +219,35 @@ function render() {
     ? T.gamlePriser(T.opdateret(fmt.dato.format(opd), klokken(opd)))
     : kunIdag ? T.noteKunIdag : T.noteKvarter);
 
-  if (ja && nuPris.pris < 0) saet('under', T.betalerHelt);
-  else if (ja && nuPris.spot < 0) saet('under', T.betalerNaesten);
-  else if (ja && ligegyldigt && bedst.i > 0) saet('under', T.ligegyldigt);
-  else if (ja) saet('under', m.styring === 'app' ? T.saetNu : T.taendNu);
-  else saet('under', T.vent(tidTekst(bedst.start, nu)));
+  let under;
+  if (ligegyldigt) under = T.ligegyldigt(belob(spar, sprog));
+  else if (ja && !fastElpris && nuPris.pris < 0) under = T.betalerHelt;
+  else if (ja && !fastElpris && nuPris.spot < 0) under = T.betalerNaesten;
+  else if (ja) under = m.styring === 'app' ? T.saetNu : T.taendNu;
+  else under = T.vent(tidTekst(bedst.start, nu));
+  saet('under', under);
+  sidsteSvar = ja
+    ? T.delJa(mt.ord, under)
+    : T.delNej(mt.ord, tidTekst(bedst.start, nu), belob(spar, sprog));
 
   // Hvad man gør på maskinen eller i appen
   if (m.styring === 'app') {
-    const start = ja ? nu : bedst.start;
     saet('enhedEtiket', T.iBilensApp);
     saet('enhedTal', ja ? T.nu : klokken(bedst.start));
-    saet('enhedTekst', ja
-      ? T.ladeNu(klokken(start + n * KVARTER), timer)
-      : T.lade(klokken(bedst.start), klokken(bedst.slut), timer));
+    saet('enhedTekst', ja ? T.ladeNu(klokken(nu + n * KVARTER)) : T.lade(klokken(bedst.start), klokken(bedst.slut)));
   } else if (ja) {
     saet('enhedEtiket', T.paaMaskinen);
     saet('enhedTal', T.start);
     saet('enhedTekst', T.ingenGrund);
   } else {
-    // Udskudt start går i hele timer. Vælg den af de to nærmeste, der faktisk er billigst,
-    // så maskinen ikke ryger ind i en dyrere time ved en ren afrunding.
+    // Udskudt start går i hele timer. Vælg den af de to nærmeste, der faktisk er billigst
+    // og stadig bliver færdig inden tidsgrænsen.
     const raa = vent / 3600000;
     let t = Math.round(raa);
     let bedstG = Infinity;
     for (const k of new Set([Math.floor(raa), Math.ceil(raa)])) {
       if (k < 1 || k > 24) continue;
+      if (nu + k * 3600000 + n * KVARTER > frist) continue;
       const ik = indeksVed(priser, nu + k * 3600000);
       const g = ik >= 0 ? snit(priser, ik, n) : null;
       if (g !== null && g < bedstG) { bedstG = g; t = k; }
@@ -211,28 +267,32 @@ function render() {
   }
 
   saet('spar', belob(spar, sprog));
-  saet('sparHale', ja
-    ? (ligegyldigt && bedst.i > 0 ? T.haleIngenting : T.halePaaFoer)
-    : spar >= 5 ? T.haleNoget : T.haleLidt);
+  saet('sparHale', ligegyldigt
+    ? (spar < LIGEGYLDIGT_KR ? T.haleUnder25 : T.haleUnder10)
+    : ja ? T.halePaaFoer
+      : spar >= 5 ? T.haleNoget : T.haleLidt);
 
-  tegnGraf(priser, bedst, n, m);
+  tegnGraf(priser, bedst, n, kwh, m, frist, ligegyldigt);
   opdaterKalender(m);
-  opdaterHistorik();
+  opdaterHistorik(m);
 }
 
 // Tilstand for den interaktive graf
-const graf = { priser: [], vis: [], n: 0, m: null, bedst: null, valgt: -1 };
+const graf = { priser: [], vis: [], n: 0, kwh: 0, m: null, bedst: null, valgt: -1 };
 
-function tegnGraf(priser, bedst, n, m) {
+function tegnGraf(priser, bedst, n, kwh, m, frist, ligegyldigt) {
   const boks = $('soejler');
   const akse = $('akse');
   boks.innerHTML = '';
   akse.innerHTML = '';
-  Object.assign(graf, { priser, vis: priser.slice(0, 144), n, m, bedst });
+  Object.assign(graf, { priser, vis: priser.slice(0, 144), n, kwh, m, bedst });
   const vis = graf.vis;
+  const markoer = $('fristMarkoer');
   if (!vis.length) {
     saet('grafTitel', T.ingenPriser);
     saet('billigst', '');
+    markoer.hidden = true;
+    $('efterForklaring').hidden = true;
     ryd();
     return;
   }
@@ -240,6 +300,7 @@ function tegnGraf(priser, bedst, n, m) {
   const min = Math.min(0, ...vis.map((p) => p.pris));
   boks.classList.toggle('taet', vis.length > 72);
   const trin = window.innerWidth < 600 && vis.length > 48 ? 6 : 3;
+  const fristI = frist === Infinity ? -1 : vis.findIndex((p) => p.t >= frist);
 
   let billigst = vis[0];
   vis.forEach((p, i) => {
@@ -248,6 +309,7 @@ function tegnGraf(priser, bedst, n, m) {
     // Højeste søjle fylder 72 %, så prisboksen har plads over den
     d.style.height = `${Math.max(2, ((p.pris - min) / (max - min || 1)) * 72)}%`;
     if (bedst && i >= bedst.i && i < bedst.i + n) d.className = 'vindue';
+    else if (fristI >= 0 && i >= fristI) d.className = 'efter';
     else if (i === 0) d.className = 'nu';
     boks.append(d);
 
@@ -260,15 +322,27 @@ function tegnGraf(priser, bedst, n, m) {
     }
   });
 
+  // Stiplet linje ved tidsgrænsen
+  markoer.hidden = fristI <= 0;
+  $('efterForklaring').hidden = fristI <= 0;
+  if (fristI > 0) {
+    const venstre = (fristI / vis.length) * 100;
+    markoer.style.left = `${venstre}%`;
+    markoer.classList.toggle('hoejre', venstre < 30);
+    saet('fristLinje', venstre < 30 ? `← ${T.frister[valgtFrist]}` : T.fristLinje(klokken(frist)));
+  }
+
   const nu = Date.now();
   const timer = Math.round(vis.length / 4);
-  saet('grafTitel', T.grafTitel(timer));
+  saet('grafTitel', fastElpris ? T.grafTitelFast(timer) : T.grafTitel(timer));
   saet('billigst', T.billigst(belob(billigst.pris, sprog), tidTekst(billigst.t, nu, true)));
   boks.setAttribute('aria-label', T.grafSlider);
   boks.setAttribute('aria-valuemax', String(vis.length - 1));
   if (bedst) {
-    saet('vindueTekst', T.vindue(n / 4, klokken(bedst.start), klokken(bedst.slut)));
-    saet('grafResume', T.grafAria(timer, belob(billigst.pris, sprog), n / 4, klokken(bedst.start), klokken(bedst.slut)));
+    saet('vindueTekst', ligegyldigt
+      ? T.vindueLigegyldigt(klokken(bedst.start), klokken(bedst.slut))
+      : T.vindue(T.varighed(n), klokken(bedst.start), klokken(bedst.slut)));
+    saet('grafResume', T.grafAria(timer, belob(billigst.pris, sprog), T.varighed(n), klokken(bedst.start), klokken(bedst.slut)));
   } else {
     saet('vindueTekst', T.vindueStandard);
     saet('grafResume', '');
@@ -278,7 +352,7 @@ function tegnGraf(priser, bedst, n, m) {
 
 // Vis pris og "hvad koster det at starte her" for kvarter i.
 function markeer(i) {
-  const { priser, vis, n, m } = graf;
+  const { priser, vis, n, kwh, m } = graf;
   if (!vis.length || !m) return;
   i = Math.max(0, Math.min(vis.length - 1, i));
   graf.valgt = i;
@@ -292,8 +366,8 @@ function markeer(i) {
   const p = vis[i];
   const prisTekst = T.tipPris(`${fmt.ugedag.format(p.t)} ${klokken(p.t)}`, belob(p.pris, sprog));
   const g = snit(priser, i, n);
-  const bedstKr = graf.bedst && graf.bedst.i !== i ? belob(graf.bedst.snit * m.kwh, sprog) : null;
-  const koster = g === null ? T.tipForSent : T.tipKoster(m2(m).ord, belob(g * m.kwh, sprog), bedstKr);
+  const bedstKr = graf.bedst && graf.bedst.i !== i ? belob(graf.bedst.snit * kwh, sprog) : null;
+  const koster = g === null ? T.tipForSent : T.tipKoster(m2(m).ord, belob(g * kwh, sprog), bedstKr);
   saet('tipPris', prisTekst);
   saet('tipKoster', koster);
 
@@ -362,16 +436,50 @@ function opdaterKalender(m) {
   $('kalKopier').dataset.url = https;
 }
 
-function opdaterHistorik() {
-  const sum = historik && historik.sum ? historik.sum[valgtNet] : undefined;
-  $('historik').hidden = sum === undefined;
-  if (sum === undefined) return;
-  saet('historikEtiket', T.historikEtiket(fmt.dato.format(new Date(historik.siden + 'T12:00:00Z'))));
-  saet('historikSum', belob(sum, sprog));
+// historik.json v2: { siden: {maskine: dato}, sum: {netselskab: {maskine: kr}} }
+// (første version havde kun opvaskeren: siden er en dato, sum[netselskab] et tal)
+function historikFor(nsId, maskineId) {
+  if (!historik || !historik.sum) return null;
+  const s = historik.sum[nsId];
+  if (s === undefined) return null;
+  if (typeof s === 'number') return maskineId === 'opvasker' ? { sum: s, siden: historik.siden } : null;
+  if (s[maskineId] === undefined) return null;
+  return { sum: s[maskineId], siden: historik.siden && historik.siden[maskineId] };
+}
+
+function opdaterHistorik(m) {
+  const h = historikFor(valgtNet, m.id);
+  $('historik').hidden = !h || !h.siden;
+  if (!h || !h.siden) return;
+  saet('historikEtiket', T.historikEtiket(fmt.dato.format(new Date(h.siden + 'T12:00:00Z'))));
+  saet('historikSum', belob(h.sum, sprog));
+  saet('historikTekst', T.historikTekst(m2(m).objekt));
   const link = KILOWATTTIME_LINK.trim();
   $('kwhKnap').hidden = !link;
   $('kwhNote').hidden = !link;
   if (link) $('kwhKnap').href = link;
+}
+
+async function del() {
+  if (!sidsteSvar) return;
+  const url = new URL(location.origin + location.pathname);
+  if (sprog === 'en') url.searchParams.set('lang', 'en');
+  const knap = $('delTekst');
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: document.title, text: sidsteSvar, url: url.href });
+      return;
+    } catch (fejl) {
+      if (fejl && fejl.name === 'AbortError') return;
+    }
+  }
+  try {
+    await navigator.clipboard.writeText(`${sidsteSvar} ${url.href}`);
+    knap.textContent = T.delKopieret;
+  } catch {
+    knap.textContent = T.kalKopiFejl;
+  }
+  setTimeout(() => { knap.textContent = T.del; }, 2500);
 }
 
 async function start() {
@@ -397,8 +505,24 @@ async function start() {
   $('maskine').addEventListener('change', (e) => {
     valgtMaskine = e.target.value;
     gem.saet('maskine', valgtMaskine);
+    byggeProgrammer();
     render();
   });
+  $('program').addEventListener('change', (e) => {
+    gem.saet('program-' + valgtMaskine, e.target.value);
+    render();
+  });
+  $('frist').addEventListener('change', (e) => {
+    valgtFrist = e.target.value;
+    gem.saet('frist', valgtFrist);
+    render();
+  });
+  $('fast').addEventListener('change', (e) => {
+    fastElpris = e.target.checked;
+    gem.saet('fast', fastElpris ? '1' : '0');
+    render();
+  });
+  $('delKnap').addEventListener('click', del);
   for (const knap of document.querySelectorAll('.sprogknap')) {
     knap.addEventListener('click', () => {
       sprog = knap.dataset.sprog;

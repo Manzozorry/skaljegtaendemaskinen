@@ -48,7 +48,8 @@ export function kr(x) {
 // Samlet pris pr. kvarter for et netselskab, i kr./kWh inkl. moms:
 // spotpris + nettarif (efter time på døgnet) + elafgift + Energinets tariffer.
 // Elselskabets eget tillæg og abonnementer er ikke med.
-export function totalpriser(data, netselskabId) {
+// Med { fast: true } (fast elpris) tælles spotprisen ikke med, kun det der svinger.
+export function totalpriser(data, netselskabId, { fast = false } = {}) {
   const ns = data.netselskaber.find((n) => n.id === netselskabId);
   if (!ns) return [];
   const omr = data.omraader[ns.omraade];
@@ -61,9 +62,9 @@ export function totalpriser(data, netselskabId) {
     const tarif = ns.tarif[l.dato];
     const faste = data.faste[l.dato];
     if (!tarif || !faste) continue;
-    const spot = omr.kvarter[i];
-    const fast = faste.elafgift + faste.systemtarif + faste.transmission;
-    ud.push({ t, spot, pris: (spot + tarif[l.time] + fast) * (1 + MOMS) });
+    const spot = fast ? 0 : omr.kvarter[i];
+    const afgifter = faste.elafgift + faste.systemtarif + faste.transmission;
+    ud.push({ t, spot, pris: (spot + tarif[l.time] + afgifter) * (1 + MOMS) });
   }
   return ud;
 }

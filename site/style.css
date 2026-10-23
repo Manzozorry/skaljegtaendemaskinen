@@ -28,6 +28,7 @@
   --accent: #FFD400;
   --soejle: #5C6D77;
   --soejle-nu: #E8EDEF;
+  --soejle-efter: #26343C;
   --graf-tekst: #B9C6CD;
   --sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: 'Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
@@ -142,6 +143,23 @@ main { display: flex; flex-direction: column; gap: 48px; }
   margin: 0;
 }
 .maskinvalg:focus-within { outline: 3px solid var(--blaek); outline-offset: 6px; }
+
+.valglinje {
+  margin: 4px 0 0;
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.6;
+  font-weight: 600;
+}
+.forled { color: var(--daempet); }
+.maskinvalg.lille-valg { border-bottom-width: 3px; border-bottom-color: var(--blaek); padding-right: 1.1em; }
+.maskinvalg.lille-valg svg { top: 55%; transform: translateY(-50%); }
+
+.fast { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.fast input { width: 20px; height: 20px; margin: 0; accent-color: var(--blaek); }
+.fast label { color: var(--blaek); cursor: pointer; }
+
+.del-raekke { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 14px; }
+.del-raekke .note { margin: 0; }
 
 .stort {
   margin: 0;
@@ -281,11 +299,31 @@ main { display: flex; flex-direction: column; gap: 48px; }
 .soejler.taet { gap: 1px; }
 .soejler div { flex: 1 1 0; min-width: 0; background: var(--soejle); transition: opacity 120ms ease-out; }
 .soejler div.nu { background: var(--soejle-nu); }
+.soejler div.efter { background: var(--soejle-efter); }
 .soejler div.vindue { background: var(--accent); }
 .soejler.peger div { opacity: 0.35; }
 .soejler.peger div.proeve { opacity: 1; }
 .soejler.peger div.proeve:not(.vindue) { background: #C9D4DA; }
 .soejler.peger div.markoer { background: #FFFFFF; opacity: 1; }
+
+.frist {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 2px dashed var(--accent);
+  pointer-events: none;
+}
+.frist span {
+  position: absolute;
+  top: 0;
+  right: 6px;
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.frist.hoejre span { right: auto; left: 6px; }
 
 .tip {
   position: absolute;
@@ -354,6 +392,7 @@ footer p { margin: 0; max-width: 760px; }
   .sprogknap { min-width: 40px; min-height: 40px; }
   .valg-net { gap: 4px 8px; }
   .valg-net label { flex-basis: 100%; font-size: 12px; }
+  .valg-net .fast label { flex-basis: auto; font-size: 13px; }
   .valg-net select.boks { flex: 1 1 100%; max-width: 100%; }
   .gaet { font-size: 12px; }
   main { gap: 36px; }

@@ -1,34 +1,50 @@
 [
   {
     "id": "opvasker",
-    "kvarterer": 12,
-    "kwh": 0.9,
     "styring": "udskudt",
-    "da": { "ord": "opvaskeren", "navn": "opvasker", "kalender": "Tænd opvaskeren", "replik": "" },
-    "en": { "ord": "the dishwasher", "navn": "dishwasher", "kalender": "Turn on the dishwasher", "replik": "" }
+    "standard": "eco",
+    "programmer": [
+      { "id": "eco", "kvarterer": 12, "kwh": 0.9, "da": "Eco", "en": "Eco" },
+      { "id": "normal", "kvarterer": 8, "kwh": 1.1, "da": "Normal", "en": "Normal" },
+      { "id": "kort", "kvarterer": 4, "kwh": 0.8, "da": "Kort", "en": "Quick" }
+    ],
+    "da": { "ord": "opvaskeren", "navn": "opvasker", "objekt": "opvasken", "forled": "på", "kalender": "Tænd opvaskeren", "replik": "" },
+    "en": { "ord": "the dishwasher", "navn": "dishwasher", "objekt": "the dishwasher", "forled": "on", "kalender": "Turn on the dishwasher", "replik": "" }
   },
   {
     "id": "vask",
-    "kvarterer": 8,
-    "kwh": 0.7,
     "styring": "udskudt",
-    "da": { "ord": "vaskemaskinen", "navn": "vaskemaskine", "kalender": "Start vaskemaskinen", "replik": "" },
-    "en": { "ord": "the washing machine", "navn": "washing machine", "kalender": "Start the washing machine", "replik": "" }
+    "standard": "40",
+    "programmer": [
+      { "id": "40", "kvarterer": 8, "kwh": 0.7, "da": "40°", "en": "40°" },
+      { "id": "60", "kvarterer": 10, "kwh": 1.0, "da": "60°", "en": "60°" },
+      { "id": "kort", "kvarterer": 2, "kwh": 0.3, "da": "Kort", "en": "Quick" }
+    ],
+    "da": { "ord": "vaskemaskinen", "navn": "vaskemaskine", "objekt": "vasken", "forled": "på", "kalender": "Start vaskemaskinen", "replik": "" },
+    "en": { "ord": "the washing machine", "navn": "washing machine", "objekt": "the washing", "forled": "on", "kalender": "Start the washing machine", "replik": "" }
   },
   {
     "id": "tumbler",
-    "kvarterer": 8,
-    "kwh": 2.2,
     "styring": "udskudt",
-    "da": { "ord": "tørretumbleren", "navn": "tørretumbler", "kalender": "Start tørretumbleren", "replik": "Eller hæng tøjet ud. Det er gratis." },
-    "en": { "ord": "the tumble dryer", "navn": "tumble dryer", "kalender": "Start the tumble dryer", "replik": "Or hang it out to dry. That's free." }
+    "standard": "varmepumpe",
+    "programmer": [
+      { "id": "varmepumpe", "kvarterer": 10, "kwh": 1.5, "da": "Varmepumpe", "en": "Heat pump" },
+      { "id": "kondens", "kvarterer": 8, "kwh": 3.5, "da": "Kondens", "en": "Condenser" }
+    ],
+    "da": { "ord": "tørretumbleren", "navn": "tørretumbler", "objekt": "tørretumbleren", "forled": "på", "kalender": "Start tørretumbleren", "replik": "Eller hæng tøjet ud. Det er gratis." },
+    "en": { "ord": "the tumble dryer", "navn": "tumble dryer", "objekt": "the tumble dryer", "forled": "on", "kalender": "Start the tumble dryer", "replik": "Or hang it out to dry. That's free." }
   },
   {
     "id": "elbil",
-    "kvarterer": 24,
-    "kwh": 30,
     "styring": "app",
-    "da": { "ord": "laderen", "navn": "elbil", "kalender": "Sæt elbilen til at lade", "replik": "" },
-    "en": { "ord": "the car charger", "navn": "electric car", "kalender": "Charge the car", "replik": "" }
+    "standard": "30",
+    "programmer": [
+      { "id": "10", "kvarterer": 8, "kwh": 10, "da": "10 kWh", "en": "10 kWh" },
+      { "id": "20", "kvarterer": 16, "kwh": 20, "da": "20 kWh", "en": "20 kWh" },
+      { "id": "30", "kvarterer": 24, "kwh": 30, "da": "30 kWh", "en": "30 kWh" },
+      { "id": "40", "kvarterer": 32, "kwh": 40, "da": "40 kWh", "en": "40 kWh" }
+    ],
+    "da": { "ord": "laderen", "navn": "elbil", "objekt": "elbilen", "forled": "med", "kalender": "Sæt elbilen til at lade", "replik": "" },
+    "en": { "ord": "the car charger", "navn": "electric car", "objekt": "the car", "forled": "with", "kalender": "Charge the car", "replik": "" }
   }
 ]

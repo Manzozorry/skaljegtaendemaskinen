@@ -38,6 +38,7 @@
   <div class="valg-net">
     <label for="netselskab" data-t="netselskab">Hvor bor du?</label>
     <select id="netselskab" class="boks"></select>
+    <span class="fast"><input type="checkbox" id="fast"><label for="fast" data-t="fastElpris">Jeg har fast elpris</label></span>
     <span id="gaet" class="gaet" data-t="gaet" hidden>Et gæt. Vælg dit netselskab for det præcise svar.</span>
   </div>
 </header>
@@ -45,10 +46,15 @@
 <main>
   <section class="svar" aria-live="polite">
     <h1 class="spoergsmaal"><span data-t="spoergFoer">Skal jeg tænde </span><span class="maskinvalg"><span id="maskineord">opvaskeren</span><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M2 5l6 6 6-6" fill="none" stroke="#0D1B24" stroke-width="2.5"/></svg><select id="maskine" aria-label="Vælg maskine"></select></span>?</h1>
+    <p class="valglinje"><span class="forled" id="forled">på</span> <span class="maskinvalg lille-valg"><span id="programTekst">Eco · 3 t</span><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M2 5l6 6 6-6" fill="none" stroke="#0D1B24" stroke-width="2.5"/></svg><select id="program" aria-label="Vælg program"></select></span> <span class="forled" data-t="og">og</span> <span class="maskinvalg lille-valg"><span id="fristTekst">uden tidsgrænse</span><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M2 5l6 6 6-6" fill="none" stroke="#0D1B24" stroke-width="2.5"/></svg><select id="frist" aria-label="Hvornår skal den være færdig?"><option value="ingen">uden tidsgrænse</option><option value="07">færdig senest kl. 07</option><option value="16">færdig senest kl. 16</option><option value="22">færdig senest kl. 22</option></select></span></p>
     <p class="stort" id="svar">…</p>
     <p class="under" id="under" data-t="regner">Regner…</p>
     <p class="replik" id="replik" hidden></p>
-    <p class="note" id="note" data-t="noteKvarter">Svaret skifter hvert kvarter.</p>
+    <p class="replik" id="fastNote" data-t="fastNote" hidden>Med fast elpris svinger kun nettariffen: billigst kl. 00–06, dyrest kl. 17–21.</p>
+    <div class="del-raekke">
+      <button class="knap" id="delKnap" type="button"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 10V2M5 5l3-3 3 3M3 8v6h10V8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span id="delTekst" data-t="del">Del svaret</span></button>
+      <p class="note" id="note" data-t="noteKvarter">Svaret skifter hvert kvarter.</p>
+    </div>
   </section>
 
   <section class="raekke">
@@ -71,6 +77,7 @@
     </div>
     <p class="sr-only" id="grafResume"></p>
     <div class="graf-omraade">
+      <div class="frist" id="fristMarkoer" hidden><span id="fristLinje"></span></div>
       <div class="tip" id="tip" hidden><b id="tipPris"></b><span id="tipKoster"></span></div>
       <div class="soejler" id="soejler" tabindex="0" role="slider" aria-label="Vælg et tidspunkt i grafen" aria-describedby="grafResume" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></div>
     </div>
@@ -80,6 +87,7 @@
       <span><i style="background: var(--accent)"></i><span id="vindueTekst" data-t="vindueStandard">Billigste vindue</span></span>
       <span><i style="background: var(--soejle-nu)"></i><span data-t="nu">Nu</span></span>
       <span><i style="background: var(--soejle)"></i><span data-t="resten">Resten</span></span>
+      <span id="efterForklaring" hidden><i style="background: var(--soejle-efter); outline: 1px solid var(--soejle)"></i><span data-t="efterFrist">Efter tidsgrænsen</span></span>
     </div>
   </section>
 
@@ -98,7 +106,7 @@
     <div class="kort" id="historik" hidden>
       <div class="etiket" id="historikEtiket">Hvis du havde fulgt siden</div>
       <div class="tal"><span id="historikSum">–</span><span data-t="krSuffix"> kr.</span></div>
-      <p data-t="historikTekst">sparet på opvasken i forhold til at starte den kl. 19 hver aften.</p>
+      <p id="historikTekst">sparet på opvasken i forhold til at starte kl. 19 hver aften.</p>
       <a class="knap gul" id="kwhKnap" href="#" target="_blank" rel="noopener" hidden><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M9.5 1L3 9.2h4.3L6.5 15 13 6.8H8.7L9.5 1z" fill="#0D1B24"/></svg><span data-t="kwhKnap">Køb mig en kilowatttime · 20 kr.</span></a>
       <span class="lille" id="kwhNote" data-t="kwhNote" hidden>Danmarks dyreste kilowatttime. Med vilje.</span>
     </div>
