@@ -165,7 +165,7 @@ async function main() {
   };
 
   await mkdir(join(SITE, 'data'), { recursive: true });
-  await mkdir(join(SITE, 'cal'), { recursive: true });
+  await mkdir(join(SITE, 'cal', 'en'), { recursive: true });
   await writeFile(join(SITE, 'data/latest.json'), JSON.stringify(data));
 
   // 4. Kalendere og "sparet siden"
@@ -189,8 +189,9 @@ async function main() {
         const v = aftenvindue(priser, d, m.kvarterer);
         if (v) begivenheder.push({ dato: d, ...v });
       }
-      await writeFile(join(SITE, 'cal', `${ns.id}-${m.id}.ics`), kalender(ns, m, begivenheder));
-      kalendere++;
+      await writeFile(join(SITE, 'cal', `${ns.id}-${m.id}.ics`), kalender(ns, m, begivenheder, 'da'));
+      await writeFile(join(SITE, 'cal', 'en', `${ns.id}-${m.id}.ics`), kalender(ns, m, begivenheder, 'en'));
+      kalendere += 2;
     }
 
     // Læg hver aftens besparelse til én gang pr. dato
@@ -236,16 +237,39 @@ function fold(linje) {
 
 const icsTid = (ms) => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 
-function kalender(ns, m, begivenheder) {
+const KAL = {
+  da: {
+    beskrivelse: 'Billigste tidspunkt hver aften og nat.',
+    billigst: (t, fra, til) => `Billigste ${t} timer: ${fra}–${til}.`,
+    sparer: (x) => `Det sparer ${kr(x)} kr. i forhold til at starte kl. 19.`,
+    ligesaa: 'Kl. 19 er lige så billigt i aften.',
+    app: (fra) => `Sæt ladestart til ${fra} i bilens app.`,
+    udskudt: (fra) => `Har maskinen udskudt start, så sæt den til at gå i gang kl. ${fra}.`,
+    note: 'Priser inkl. nettarif, afgifter og moms (ekskl. elselskabets tillæg).'
+  },
+  en: {
+    beskrivelse: 'The cheapest time every evening and night.',
+    billigst: (t, fra, til) => `Cheapest ${t} hours: ${fra}–${til}.`,
+    sparer: (x) => `Saves ${(Math.round(x * 100) / 100).toFixed(2)} kr compared to starting at 7 pm.`,
+    ligesaa: '7 pm is just as cheap tonight.',
+    app: (fra) => `Set charging to start at ${fra} in the car app.`,
+    udskudt: (fra) => `If the machine has delay start, set it to start at ${fra}.`,
+    note: 'Prices include grid tariff, taxes and VAT (excluding your supplier’s markup).'
+  }
+};
+
+function kalender(ns, m, begivenheder, sprog) {
   const timer = m.kvarterer / 4;
+  const k = KAL[sprog];
+  const navn = m[sprog].kalender;
   const linjer = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    `PRODID:-//${DOMAENE}//DA`,
+    `PRODID:-//${DOMAENE}//${sprog.toUpperCase()}`,
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
-    `X-WR-CALNAME:${tekst(`${m.kalender} · ${ns.navn}`)}`,
-    `X-WR-CALDESC:${tekst('Billigste tidspunkt hver aften og nat. skaljegtændemaskinen.dk')}`,
+    `X-WR-CALNAME:${tekst(`${navn} · ${ns.navn}`)}`,
+    `X-WR-CALDESC:${tekst(k.beskrivelse)}`,
     'X-WR-TIMEZONE:Europe/Copenhagen',
     'REFRESH-INTERVAL;VALUE=DURATION:PT4H',
     'X-PUBLISHED-TTL:PT4H'
@@ -253,22 +277,18 @@ function kalender(ns, m, begivenheder) {
   for (const b of begivenheder) {
     const spar = (b.naiv - b.snit) * m.kwh;
     const beskrivelse = [
-      `Billigste ${timer} timer: ${klokken(b.start)}–${klokken(b.slut)}.`,
-      spar >= 0.005
-        ? `Det sparer ${kr(spar)} kr. i forhold til at starte kl. 19.`
-        : 'Kl. 19 er lige så billigt i aften.',
-      m.styring === 'app'
-        ? `Sæt ladestart til ${klokken(b.start)} i bilens app.`
-        : `Har maskinen udskudt start, så sæt den til at gå i gang kl. ${klokken(b.start)}.`,
-      'Priser inkl. nettarif, afgifter og moms (ekskl. elselskabets tillæg).'
+      k.billigst(timer, klokken(b.start), klokken(b.slut)),
+      spar >= 0.005 ? k.sparer(spar) : k.ligesaa,
+      m.styring === 'app' ? k.app(klokken(b.start)) : k.udskudt(klokken(b.start)),
+      k.note
     ].join('\n');
     linjer.push(
       'BEGIN:VEVENT',
-      `UID:${b.dato}-${ns.id}-${m.id}@${DOMAENE}`,
+      `UID:${b.dato}-${ns.id}-${m.id}-${sprog}@${DOMAENE}`,
       `DTSTAMP:${icsTid(NU)}`,
       `DTSTART:${icsTid(b.start)}`,
       `DTEND:${icsTid(b.slut)}`,
-      `SUMMARY:${tekst(m.kalender)}`,
+      `SUMMARY:${tekst(navn)}`,
       `DESCRIPTION:${tekst(beskrivelse)}`,
       'TRANSP:TRANSPARENT',
       'END:VEVENT'

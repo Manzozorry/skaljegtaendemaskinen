@@ -1,6 +1,7 @@
 import {
-  lokal, klokken, kr, plusDage, totalpriser, bedsteVindue, snit, indeksVed, KVARTER
+  lokal, klokken, plusDage, totalpriser, bedsteVindue, snit, indeksVed, KVARTER
 } from './beregn.js';
+import { tekster, belob } from './tekster.js';
 
 // Indsæt dit Buy Me a Coffee-link her, så dukker kilowatttime-knappen op.
 // Fx 'https://buymeacoffee.com/ditnavn'
@@ -18,15 +19,50 @@ let historik = null;
 let sidstHentet = 0;
 let valgtNet = gem.hent('netselskab');
 let valgtMaskine = gem.hent('maskine') || 'opvasker';
+let sprog = vaelgSprog();
+let T = tekster[sprog];
 
-const datoKort = new Intl.DateTimeFormat('da-DK', { day: 'numeric', month: 'short', timeZone: 'Europe/Copenhagen' });
-const ugedag = new Intl.DateTimeFormat('da-DK', { weekday: 'short', timeZone: 'Europe/Copenhagen' });
+// ?lang=en i adressen > tidligere valg > browserens sprog
+function vaelgSprog() {
+  const fraUrl = new URLSearchParams(location.search).get('lang');
+  if (fraUrl === 'da' || fraUrl === 'en') return fraUrl;
+  const gemt = gem.hent('sprog');
+  if (gemt === 'da' || gemt === 'en') return gemt;
+  const browser = (navigator.languages || [navigator.language || 'da']).map((l) => l.toLowerCase());
+  const dansk = browser.findIndex((l) => l.startsWith('da') || l.startsWith('nb') || l.startsWith('no'));
+  const engelsk = browser.findIndex((l) => !l.startsWith('da') && !l.startsWith('nb') && !l.startsWith('no'));
+  if (dansk === -1) return 'en';
+  if (engelsk === -1) return 'da';
+  return dansk < engelsk ? 'da' : 'en';
+}
+
+const fmt = {};
+function opdaterFormater() {
+  fmt.dato = new Intl.DateTimeFormat(T.locale, { day: 'numeric', month: 'short', timeZone: 'Europe/Copenhagen' });
+  fmt.ugedag = new Intl.DateTimeFormat(T.locale, { weekday: 'short', timeZone: 'Europe/Copenhagen' });
+}
+
+function anvendSprog() {
+  T = tekster[sprog];
+  document.documentElement.lang = sprog;
+  opdaterFormater();
+  for (const el of document.querySelectorAll('[data-t]')) {
+    const v = T[el.dataset.t];
+    if (typeof v === 'string') el.textContent = v;
+  }
+  for (const knap of document.querySelectorAll('.sprogknap')) {
+    knap.setAttribute('aria-pressed', String(knap.dataset.sprog === sprog));
+  }
+  $('maskine').setAttribute('aria-label', T.vaelgMaskine);
+}
+
+const m2 = (m) => m[sprog] || m.da;
 
 async function hentData() {
   const v = Math.floor(Date.now() / (5 * 60 * 1000));
   const [d, m, h] = await Promise.all([
     fetch(`data/latest.json?v=${v}`).then((r) => r.json()),
-    fetch('maskiner.json').then((r) => r.json()),
+    fetch(`maskiner.json?v=${v}`).then((r) => r.json()),
     fetch(`data/historik.json?v=${v}`).then((r) => (r.ok ? r.json() : null)).catch(() => null)
   ]);
   data = d;
@@ -38,7 +74,7 @@ async function hentData() {
 function byggeValg() {
   const net = $('netselskab');
   net.innerHTML = '';
-  for (const [omr, navn] of [['DK2', 'Øst for Storebælt'], ['DK1', 'Vest for Storebælt']]) {
+  for (const [omr, navn] of [['DK2', T.oest], ['DK1', T.vest]]) {
     const gruppe = document.createElement('optgroup');
     gruppe.label = navn;
     for (const ns of data.netselskaber.filter((n) => n.omraade === omr)) {
@@ -54,22 +90,22 @@ function byggeValg() {
 
   const mask = $('maskine');
   mask.innerHTML = '';
-  for (const m of maskiner) mask.append(new Option(m.ord, m.id));
+  for (const m of maskiner) mask.append(new Option(m2(m).ord, m.id));
   if (!maskiner.some((m) => m.id === valgtMaskine)) valgtMaskine = maskiner[0].id;
   mask.value = valgtMaskine;
 
-  $('antagelser').textContent = 'Antagelser: ' + maskiner
-    .map((m) => `${m.navn.toLowerCase()} ${kr(m.kwh).replace(',00', '')} kWh på ${m.kvarterer / 4} t`)
-    .join(', ') + '.';
+  $('antagelser').textContent = T.antagelser(maskiner
+    .map((m) => T.antagelse(m2(m).navn, new Intl.NumberFormat(T.locale, { maximumFractionDigits: 2 }).format(m.kwh), m.kvarterer / 4))
+    .join(', '));
 }
 
 // "02:00" i nat, "i morgen kl. 13:00" når det er i morgen i dagtimerne.
-function tidTekst(ms, nu) {
+function tidTekst(ms, nu, medKl = false) {
   const l = lokal(ms);
   const idag = lokal(nu).dato;
-  if (l.dato === idag || (l.dato === plusDage(idag, 1) && l.time < 6)) return klokken(ms);
-  if (l.dato === plusDage(idag, 1)) return `i morgen kl. ${klokken(ms)}`;
-  return `${ugedag.format(ms)} kl. ${klokken(ms)}`;
+  if (l.dato === idag || (l.dato === plusDage(idag, 1) && l.time < 6)) return medKl ? T.kl(klokken(ms)) : klokken(ms);
+  if (l.dato === plusDage(idag, 1)) return T.iMorgen(klokken(ms));
+  return T.ugedagKl(fmt.ugedag.format(ms), klokken(ms));
 }
 
 function saet(id, tekst) { $(id).textContent = tekst; }
@@ -77,28 +113,30 @@ function saet(id, tekst) { $(id).textContent = tekst; }
 function render() {
   if (!data) return;
   const m = maskiner.find((x) => x.id === valgtMaskine) || maskiner[0];
+  const mt = m2(m);
   const n = m.kvarterer;
   const timer = n / 4;
   const nu = Date.now();
 
-  saet('maskineord', m.ord);
-  document.title = `Skal jeg tænde ${m.ord}?`;
-  saet('opdateret', `${datoKort.format(new Date(data.opdateret))} kl. ${klokken(Date.parse(data.opdateret))}`);
+  saet('maskineord', mt.ord);
+  document.title = T.titel(mt.ord);
+  const opd = Date.parse(data.opdateret);
+  saet('opdateret', T.opdateret(fmt.dato.format(opd), klokken(opd)));
 
   const alle = totalpriser(data, valgtNet);
   const i0 = indeksVed(alle, nu);
   const priser = i0 >= 0 ? alle.slice(i0) : [];
 
-  $('replik').hidden = !m.replik;
-  saet('replik', m.replik || '');
+  $('replik').hidden = !mt.replik;
+  saet('replik', mt.replik || '');
 
   if (priser.length < n) {
-    saet('svar', 'HM.');
-    saet('under', 'Det ved jeg ikke endnu.');
-    saet('note', 'Morgendagens priser kommer ved 13-tiden. Prøv igen lidt senere.');
-    saet('enhedEtiket', 'På maskinen');
+    saet('svar', T.hm);
+    saet('under', T.vedIkke);
+    saet('note', T.noteMangler);
+    saet('enhedEtiket', T.paaMaskinen);
     saet('enhedTal', '?');
-    saet('enhedTekst', 'Jeg mangler priser langt nok frem.');
+    saet('enhedTekst', T.manglerPriser);
     saet('spar', '–');
     saet('sparHale', '');
     tegnGraf(priser, null, n);
@@ -115,48 +153,48 @@ function render() {
   const ja = bedst.i === 0 || vent < 10 * 60 * 1000 || ligegyldigt;
   const nuPris = priser[0];
 
-  saet('svar', ja ? 'JA.' : 'NEJ.');
+  saet('svar', ja ? T.ja : T.nej);
   const kunIdag = lokal(alle[alle.length - 1].t).dato === lokal(nu).dato;
-  saet('note', kunIdag
-    ? 'Natten kendes først, når morgendagens priser kommer ved 13-tiden. Svaret kan ændre sig.'
-    : 'Svaret skifter hvert kvarter.');
+  saet('note', kunIdag ? T.noteKunIdag : T.noteKvarter);
 
-  if (ja && nuPris.pris < 0) saet('under', 'De betaler dig. Helt ærligt.');
-  else if (ja && nuPris.spot < 0) saet('under', 'De betaler dig. Næsten.');
-  else if (ja && ligegyldigt && bedst.i > 0) saet('under', 'Det er lige meget lige nu.');
-  else if (ja) saet('under', m.styring === 'app' ? 'Sæt den til nu.' : 'Tænd den nu.');
-  else saet('under', `Vent til ${tidTekst(bedst.start, nu)}.`);
+  if (ja && nuPris.pris < 0) saet('under', T.betalerHelt);
+  else if (ja && nuPris.spot < 0) saet('under', T.betalerNaesten);
+  else if (ja && ligegyldigt && bedst.i > 0) saet('under', T.ligegyldigt);
+  else if (ja) saet('under', m.styring === 'app' ? T.saetNu : T.taendNu);
+  else saet('under', T.vent(tidTekst(bedst.start, nu)));
 
   // Hvad man gør på maskinen eller i appen
   if (m.styring === 'app') {
     const start = ja ? nu : bedst.start;
-    saet('enhedEtiket', 'I bilens app');
-    saet('enhedTal', ja ? 'Nu' : klokken(bedst.start));
-    saet('enhedTekst', `Sæt ladestart til ${ja ? 'nu' : klokken(bedst.start)}. De billigste ${timer} timer slutter ${klokken(start + n * KVARTER)}.`);
+    saet('enhedEtiket', T.iBilensApp);
+    saet('enhedTal', ja ? T.nu : klokken(bedst.start));
+    saet('enhedTekst', ja
+      ? T.ladeNu(klokken(start + n * KVARTER), timer)
+      : T.lade(klokken(bedst.start), klokken(bedst.slut), timer));
   } else if (ja) {
-    saet('enhedEtiket', 'På maskinen');
-    saet('enhedTal', 'Start');
-    saet('enhedTekst', 'Nu. Ingen grund til at vente.');
+    saet('enhedEtiket', T.paaMaskinen);
+    saet('enhedTal', T.start);
+    saet('enhedTekst', T.ingenGrund);
   } else {
     const t = Math.round(vent / 3600000);
-    saet('enhedEtiket', 'På maskinen');
+    saet('enhedEtiket', T.paaMaskinen);
     if (t < 1) {
-      saet('enhedTal', `${Math.max(1, Math.round(vent / 60000))} min`);
-      saet('enhedTekst', `Vent lidt. Start den ${klokken(bedst.start)}.`);
+      saet('enhedTal', T.minutter(Math.max(1, Math.round(vent / 60000))));
+      saet('enhedTekst', T.ventLidt(klokken(bedst.start)));
     } else if (t > 24) {
-      saet('enhedTal', `+${t} t`);
-      saet('enhedTekst', 'Det er længere end de fleste maskiner kan udskyde. Kom tilbage i aften.');
+      saet('enhedTal', T.timerKort(t));
+      saet('enhedTekst', T.forLangt);
     } else {
       const gang = nu + t * 3600000;
-      saet('enhedTal', `+${t} t`);
-      saet('enhedTekst', `Tryk udskudt start til ${t} ${t === 1 ? 'time' : 'timer'}. Den går i gang ${klokken(gang)} og er færdig ${klokken(gang + n * KVARTER)}.`);
+      saet('enhedTal', T.timerKort(t));
+      saet('enhedTekst', T.udskudt(t, klokken(gang), klokken(gang + n * KVARTER)));
     }
   }
 
-  saet('spar', kr(spar));
+  saet('spar', belob(spar, sprog));
   saet('sparHale', ja
-    ? (ligegyldigt && bedst.i > 0 ? 'Altså ingenting. Bare tænd den.' : 'Fordi du gør det rigtige.')
-    : spar >= 5 ? 'Det er faktisk noget.' : 'Det er ikke meget. Men det er dit.');
+    ? (ligegyldigt && bedst.i > 0 ? T.haleIngenting : T.halePaaFoer)
+    : spar >= 5 ? T.haleNoget : T.haleLidt);
 
   tegnGraf(priser, bedst, n);
   opdaterKalender(m);
@@ -169,7 +207,7 @@ function tegnGraf(priser, bedst, n) {
   boks.innerHTML = '';
   akse.innerHTML = '';
   if (!priser.length) {
-    saet('grafTitel', 'Ingen priser endnu');
+    saet('grafTitel', T.ingenPriser);
     saet('billigst', '');
     return;
   }
@@ -192,28 +230,29 @@ function tegnGraf(priser, bedst, n) {
     if (l.minut === 0 && l.time % trin === 0 && i > 1 && i < vis.length - 4) {
       const s = document.createElement('span');
       s.style.left = `${(i / vis.length) * 100}%`;
-      s.textContent = l.time === 0 ? ugedag.format(p.t) : String(l.time).padStart(2, '0');
+      s.textContent = l.time === 0 ? fmt.ugedag.format(p.t) : String(l.time).padStart(2, '0');
       akse.append(s);
     }
   });
 
   const nu = Date.now();
-  saet('grafTitel', `Pris de næste ${Math.round(vis.length / 4)} timer · kr/kWh`);
-  const hvornaar = tidTekst(billigst.t, nu);
-  saet('billigst', `Billigst ${kr(billigst.pris)} kr ${hvornaar.includes('kl.') ? hvornaar : 'kl. ' + hvornaar}`);
+  const timer = Math.round(vis.length / 4);
+  saet('grafTitel', T.grafTitel(timer));
+  saet('billigst', T.billigst(belob(billigst.pris, sprog), tidTekst(billigst.t, nu, true)));
   if (bedst) {
-    saet('vindueTekst', `Billigste ${n / 4} timer · ${klokken(bedst.start)}–${klokken(bedst.slut)}`);
-    boks.setAttribute('aria-label',
-      `Elprisen pr. kvarter de næste ${Math.round(vis.length / 4)} timer. Billigst ${kr(billigst.pris)} kr. ` +
-      `De billigste ${n / 4} timer er ${klokken(bedst.start)} til ${klokken(bedst.slut)}.`);
+    saet('vindueTekst', T.vindue(n / 4, klokken(bedst.start), klokken(bedst.slut)));
+    boks.setAttribute('aria-label', T.grafAria(timer, belob(billigst.pris, sprog), n / 4, klokken(bedst.start), klokken(bedst.slut)));
+  } else {
+    saet('vindueTekst', T.vindueStandard);
   }
 }
 
 function opdaterKalender(m) {
-  const https = new URL(`cal/${valgtNet}-${m.id}.ics`, location.href).href;
+  const sti = sprog === 'en' ? `cal/en/${valgtNet}-${m.id}.ics` : `cal/${valgtNet}-${m.id}.ics`;
+  const https = new URL(sti, location.href).href;
   const webcal = https.replace(/^https?:/, 'webcal:');
   const ns = data.netselskaber.find((x) => x.id === valgtNet);
-  const navn = `${m.kalender} · ${ns ? ns.navn : ''}`;
+  const navn = `${m2(m).kalender} · ${ns ? ns.navn : ''}`;
   $('kalGoogle').href = `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}`;
   $('kalOutlook').href = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(https)}&name=${encodeURIComponent(navn)}`;
   $('kalIphone').href = webcal;
@@ -224,8 +263,8 @@ function opdaterHistorik() {
   const sum = historik && historik.sum ? historik.sum[valgtNet] : undefined;
   $('historik').hidden = sum === undefined;
   if (sum === undefined) return;
-  saet('historikEtiket', `Hvis du havde fulgt siden fra ${datoKort.format(new Date(historik.siden + 'T12:00:00Z'))}`);
-  saet('historikSum', kr(sum));
+  saet('historikEtiket', T.historikEtiket(fmt.dato.format(new Date(historik.siden + 'T12:00:00Z'))));
+  saet('historikSum', belob(sum, sprog));
   const link = KILOWATTTIME_LINK.trim();
   $('kwhKnap').hidden = !link;
   $('kwhNote').hidden = !link;
@@ -233,12 +272,13 @@ function opdaterHistorik() {
 }
 
 async function start() {
+  anvendSprog();
   try {
     await hentData();
   } catch {
-    saet('svar', 'HM.');
-    saet('under', 'Jeg kunne ikke hente priserne.');
-    saet('note', 'Prøv at genindlæse siden om lidt.');
+    saet('svar', T.hm);
+    saet('under', T.kunneIkkeHente);
+    saet('note', T.proevIgen);
     return;
   }
   byggeValg();
@@ -255,15 +295,27 @@ async function start() {
     gem.saet('maskine', valgtMaskine);
     render();
   });
+  for (const knap of document.querySelectorAll('.sprogknap')) {
+    knap.addEventListener('click', () => {
+      sprog = knap.dataset.sprog;
+      gem.saet('sprog', sprog);
+      const url = new URL(location.href);
+      url.searchParams.delete('lang');
+      history.replaceState(null, '', url);
+      anvendSprog();
+      byggeValg();
+      render();
+    });
+  }
   $('kalKopier').addEventListener('click', async (e) => {
     const knap = e.currentTarget;
     try {
       await navigator.clipboard.writeText(knap.dataset.url);
-      knap.textContent = 'Kopieret';
+      knap.textContent = T.kalKopieret;
     } catch {
-      knap.textContent = 'Kunne ikke kopiere';
+      knap.textContent = T.kalKopiFejl;
     }
-    setTimeout(() => { knap.textContent = 'Kopiér link'; }, 2000);
+    setTimeout(() => { knap.textContent = T.kalKopier; }, 2000);
   });
 
   setInterval(render, 60 * 1000);

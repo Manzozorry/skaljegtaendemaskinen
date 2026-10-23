@@ -74,6 +74,23 @@ a:hover { color: #3A4A54; }
 .valg-net label { color: var(--daempet); }
 .gaet { color: var(--daempet); }
 
+.sprog { display: inline-flex; }
+.sprogknap {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 2px solid var(--blaek);
+  border-radius: 0;
+  background: var(--flade);
+  color: var(--blaek);
+  cursor: pointer;
+}
+.sprogknap + .sprogknap { border-left: 0; }
+.sprogknap[aria-pressed="true"] { background: var(--blaek); color: #FFFFFF; }
+
 select.boks {
   font-family: var(--mono);
   font-size: 14px;

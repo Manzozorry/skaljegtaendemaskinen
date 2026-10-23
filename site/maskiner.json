@@ -1,42 +1,34 @@
 [
   {
     "id": "opvasker",
-    "ord": "opvaskeren",
-    "navn": "Opvasker",
     "kvarterer": 12,
     "kwh": 0.9,
     "styring": "udskudt",
-    "replik": "",
-    "kalender": "Tænd opvaskeren"
+    "da": { "ord": "opvaskeren", "navn": "opvasker", "kalender": "Tænd opvaskeren", "replik": "" },
+    "en": { "ord": "the dishwasher", "navn": "dishwasher", "kalender": "Turn on the dishwasher", "replik": "" }
   },
   {
     "id": "vask",
-    "ord": "vaskemaskinen",
-    "navn": "Vaskemaskine",
     "kvarterer": 8,
     "kwh": 0.7,
     "styring": "udskudt",
-    "replik": "",
-    "kalender": "Start vaskemaskinen"
+    "da": { "ord": "vaskemaskinen", "navn": "vaskemaskine", "kalender": "Start vaskemaskinen", "replik": "" },
+    "en": { "ord": "the washing machine", "navn": "washing machine", "kalender": "Start the washing machine", "replik": "" }
   },
   {
     "id": "tumbler",
-    "ord": "tørretumbleren",
-    "navn": "Tørretumbler",
     "kvarterer": 8,
     "kwh": 2.2,
     "styring": "udskudt",
-    "replik": "Eller hæng tøjet ud. Det er gratis.",
-    "kalender": "Start tørretumbleren"
+    "da": { "ord": "tørretumbleren", "navn": "tørretumbler", "kalender": "Start tørretumbleren", "replik": "Eller hæng tøjet ud. Det er gratis." },
+    "en": { "ord": "the tumble dryer", "navn": "tumble dryer", "kalender": "Start the tumble dryer", "replik": "Or hang it out to dry. That's free." }
   },
   {
     "id": "elbil",
-    "ord": "laderen",
-    "navn": "Elbil",
     "kvarterer": 24,
     "kwh": 30,
     "styring": "app",
-    "replik": "",
-    "kalender": "Sæt elbilen til at lade"
+    "da": { "ord": "laderen", "navn": "elbil", "kalender": "Sæt elbilen til at lade", "replik": "" },
+    "en": { "ord": "the car charger", "navn": "electric car", "kalender": "Charge the car", "replik": "" }
   }
 ]
