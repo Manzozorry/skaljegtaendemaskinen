@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//skaljegtaendemaskinen//DA
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Sæt elbilen til at lade · Hurup Elværk Net
+X-WR-CALDESC:Billigste tidspunkt hver aften og nat. skaljegtændemaskinen.d
+ k
+X-WR-TIMEZONE:Europe/Copenhagen
+REFRESH-INTERVAL;VALUE=DURATION:PT4H
+X-PUBLISHED-TTL:PT4H
+BEGIN:VEVENT
+UID:2026-10-22-hurup-elbil@skaljegtaendemaskinen
+DTSTAMP:20261023T084500Z
+DTSTART:20261022T220000Z
+DTEND:20261023T040000Z
+SUMMARY:Sæt elbilen til at lade
+DESCRIPTION:Billigste 6 timer: 00:00–06:00.\nDet sparer 44\,99 kr. i forh
+ old til at starte kl. 19.\nSæt ladestart til 00:00 i bilens app.\nPriser 
+ inkl. nettarif\, afgifter og moms (ekskl. elselskabets tillæg).
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
