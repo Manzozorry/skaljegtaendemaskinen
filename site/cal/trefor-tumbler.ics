@@ -11,27 +11,27 @@ REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-trefor-tumbler-da@skaljegtaendemaskinen
-DTSTAMP:20261023T121445Z
+DTSTAMP:20261023T124016Z
 DTSTART:20261023T103000Z
-DTEND:20261023T123000Z
+DTEND:20261023T130000Z
 SUMMARY:Start tørretumbleren
-DESCRIPTION:Billigste 2 timer: 12:30–14:30.\nDet sparer 3\,77 kr. i forho
- ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
-  gå i gang kl. 12:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
- lselskabets tillæg).
+DESCRIPTION:Billigste 2.5 timer: 12:30–15:00.\nDet sparer 2\,38 kr. i for
+ hold til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til 
+ at gå i gang kl. 12:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl.
+  elselskabets tillæg).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-23-trefor-tumbler-da@skaljegtaendemaskinen
-DTSTAMP:20261023T121445Z
-DTSTART:20261024T013000Z
-DTEND:20261024T033000Z
+DTSTAMP:20261023T124016Z
+DTSTART:20261024T004500Z
+DTEND:20261024T031500Z
 SUMMARY:Start tørretumbleren
-DESCRIPTION:Billigste 2 timer: 03:30–05:30.\nDet sparer 2\,81 kr. i forho
- ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
-  gå i gang kl. 03:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
- lselskabets tillæg).
+DESCRIPTION:Billigste 2.5 timer: 02:45–05:15.\nDet sparer 1\,80 kr. i for
+ hold til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til 
+ at gå i gang kl. 02:45.\nPriser inkl. nettarif\, afgifter og moms (ekskl.
+  elselskabets tillæg).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
