@@ -4,30 +4,33 @@ PRODID:-//skaljegtaendemaskinen//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Charge the car · Sunds Net
-X-WR-CALDESC:The cheapest time every evening and night.
+X-WR-CALDESC:The cheapest time every evening and night. skaljegtaendemaskin
+ en.fun
 X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-sunds-elbil-en@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261023T084500Z
 DTEND:20261023T144500Z
 SUMMARY:Charge the car
 DESCRIPTION:Cheapest 6 hours: 10:45–16:45.\nSaves 34.43 kr compared to st
  arting at 7 pm.\nSet charging to start at 10:45 in the car app.\nPrices in
  clude grid tariff\, taxes and VAT (excluding your supplier’s markup).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-23-sunds-elbil-en@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261023T220000Z
 DTEND:20261024T040000Z
 SUMMARY:Charge the car
 DESCRIPTION:Cheapest 6 hours: 00:00–06:00.\nSaves 29.28 kr compared to st
  arting at 7 pm.\nSet charging to start at 00:00 in the car app.\nPrices in
  clude grid tariff\, taxes and VAT (excluding your supplier’s markup).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

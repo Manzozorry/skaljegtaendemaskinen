@@ -4,13 +4,14 @@ PRODID:-//skaljegtaendemaskinen//DA
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Tænd opvaskeren · Hammel Elforsyning Net
-X-WR-CALDESC:Billigste tidspunkt hver aften og nat.
+X-WR-CALDESC:Billigste tidspunkt hver aften og nat. skaljegtaendemaskinen.f
+ un
 X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-hammel-opvasker-da@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261023T104500Z
 DTEND:20261023T134500Z
 SUMMARY:Tænd opvaskeren
@@ -18,11 +19,12 @@ DESCRIPTION:Billigste 3 timer: 12:45–15:45.\nDet sparer 1\,44 kr. i forho
  ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
   gå i gang kl. 12:45.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
  lselskabets tillæg).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-23-hammel-opvasker-da@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261024T003000Z
 DTEND:20261024T033000Z
 SUMMARY:Tænd opvaskeren
@@ -30,6 +32,7 @@ DESCRIPTION:Billigste 3 timer: 02:30–05:30.\nDet sparer 1\,13 kr. i forho
  ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
   gå i gang kl. 02:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
  lselskabets tillæg).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

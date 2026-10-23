@@ -4,30 +4,33 @@ PRODID:-//skaljegtaendemaskinen//DA
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Sæt elbilen til at lade · Zeanet
-X-WR-CALDESC:Billigste tidspunkt hver aften og nat.
+X-WR-CALDESC:Billigste tidspunkt hver aften og nat. skaljegtaendemaskinen.f
+ un
 X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-zeanet-elbil-da@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261023T090000Z
 DTEND:20261023T150000Z
 SUMMARY:Sæt elbilen til at lade
 DESCRIPTION:Billigste 6 timer: 11:00–17:00.\nDet sparer 31\,92 kr. i forh
  old til at starte kl. 19.\nSæt ladestart til 11:00 i bilens app.\nPriser 
  inkl. nettarif\, afgifter og moms (ekskl. elselskabets tillæg).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-23-zeanet-elbil-da@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261023T221500Z
 DTEND:20261024T041500Z
 SUMMARY:Sæt elbilen til at lade
 DESCRIPTION:Billigste 6 timer: 00:15–06:15.\nDet sparer 27\,47 kr. i forh
  old til at starte kl. 19.\nSæt ladestart til 00:15 i bilens app.\nPriser 
  inkl. nettarif\, afgifter og moms (ekskl. elselskabets tillæg).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

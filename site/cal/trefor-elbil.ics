@@ -4,30 +4,33 @@ PRODID:-//skaljegtaendemaskinen//DA
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Sæt elbilen til at lade · TREFOR El-net
-X-WR-CALDESC:Billigste tidspunkt hver aften og nat.
+X-WR-CALDESC:Billigste tidspunkt hver aften og nat. skaljegtaendemaskinen.f
+ un
 X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-trefor-elbil-da@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261023T084500Z
 DTEND:20261023T144500Z
 SUMMARY:Sæt elbilen til at lade
 DESCRIPTION:Billigste 6 timer: 10:45–16:45.\nDet sparer 31\,34 kr. i forh
  old til at starte kl. 19.\nSæt ladestart til 10:45 i bilens app.\nPriser 
  inkl. nettarif\, afgifter og moms (ekskl. elselskabets tillæg).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-23-trefor-elbil-da@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261023T223000Z
 DTEND:20261024T043000Z
 SUMMARY:Sæt elbilen til at lade
 DESCRIPTION:Billigste 6 timer: 00:30–06:30.\nDet sparer 22\,57 kr. i forh
  old til at starte kl. 19.\nSæt ladestart til 00:30 i bilens app.\nPriser 
  inkl. nettarif\, afgifter og moms (ekskl. elselskabets tillæg).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

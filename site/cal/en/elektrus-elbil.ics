@@ -4,30 +4,33 @@ PRODID:-//skaljegtaendemaskinen//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Charge the car · Elektrus
-X-WR-CALDESC:The cheapest time every evening and night.
+X-WR-CALDESC:The cheapest time every evening and night. skaljegtaendemaskin
+ en.fun
 X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-elektrus-elbil-en@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261023T090000Z
 DTEND:20261023T150000Z
 SUMMARY:Charge the car
 DESCRIPTION:Cheapest 6 hours: 11:00–17:00.\nSaves 32.03 kr compared to st
  arting at 7 pm.\nSet charging to start at 11:00 in the car app.\nPrices in
  clude grid tariff\, taxes and VAT (excluding your supplier’s markup).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-23-elektrus-elbil-en@skaljegtaendemaskinen
-DTSTAMP:20261023T111545Z
+DTSTAMP:20261023T121141Z
 DTSTART:20261023T223000Z
 DTEND:20261024T043000Z
 SUMMARY:Charge the car
 DESCRIPTION:Cheapest 6 hours: 00:30–06:30.\nSaves 26.09 kr compared to st
  arting at 7 pm.\nSet charging to start at 00:30 in the car app.\nPrices in
  clude grid tariff\, taxes and VAT (excluding your supplier’s markup).
+URL:https://skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
