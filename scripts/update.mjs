@@ -20,7 +20,7 @@ const SITE = join(ROD, 'site');
 const API = 'https://api.energidataservice.dk/dataset/';
 const ENERGINET_GLN = '5790000432752';
 const DOMAENE = 'skaljegtaendemaskinen';
-const ADRESSE = 'https://skaljegtaendemaskinen.fun/';
+const ADRESSE = 'https://www.skaljegtaendemaskinen.fun/';
 
 const arg = (navn) => {
   const i = process.argv.indexOf(navn);

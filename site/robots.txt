@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://skaljegtaendemaskinen.fun/sitemap.xml
+Sitemap: https://www.skaljegtaendemaskinen.fun/sitemap.xml

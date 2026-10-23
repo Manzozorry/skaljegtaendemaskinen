@@ -1,6 +1,6 @@
 # Skal jeg tænde maskinen?
 
-**https://skaljegtaendemaskinen.fun**
+**https://www.skaljegtaendemaskinen.fun**
 
 En side med ét spørgsmål og ét svar: skal du tænde opvaskeren (eller vaskemaskinen, tørretumbleren, elbilladeren) nu, eller vente til strømmen er billigere?
 
@@ -21,7 +21,7 @@ Svaret regnes ud fra de rigtige priser pr. kvarter: spotpris + nettarif fra dit 
 
 1. **Settings → Pages → Build and deployment → Source:** vælg **GitHub Actions**.
 2. **Actions → Opdater priser og udgiv → Run workflow** for at hente de første priser.
-3. Siden ligger på **https://skaljegtaendemaskinen.fun** (og `manzozorry.github.io/skaljegtaendemaskinen/`).
+3. Siden ligger på **https://www.skaljegtaendemaskinen.fun** (og `manzozorry.github.io/skaljegtaendemaskinen/`).
 
 ## Ting du selv skal sætte ind
 
