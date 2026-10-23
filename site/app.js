@@ -3,9 +3,8 @@ import {
 } from './beregn.js';
 import { tekster, belob } from './tekster.js';
 
-// Indsæt dit Buy Me a Coffee-link her, så dukker kilowatttime-knappen op.
-// Fx 'https://buymeacoffee.com/ditnavn'
-const KILOWATTTIME_LINK = '';
+// Buy Me a Coffee-link til kilowatttime-knappen. Tom streng skjuler knappen.
+const KILOWATTTIME_LINK = 'https://www.buymeacoffee.com/manz';
 
 const $ = (id) => document.getElementById(id);
 const gem = {
