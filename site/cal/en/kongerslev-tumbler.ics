@@ -10,12 +10,24 @@ REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-kongerslev-tumbler-en@skaljegtaendemaskinen
-DTSTAMP:20261023T090007Z
+DTSTAMP:20261023T110402Z
 DTSTART:20261023T103000Z
 DTEND:20261023T123000Z
 SUMMARY:Start the tumble dryer
 DESCRIPTION:Cheapest 2 hours: 12:30–14:30.\nSaves 4.51 kr compared to sta
  rting at 7 pm.\nIf the machine has delay start\, set it to start at 12:30.
+ \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
+ markup).
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-10-23-kongerslev-tumbler-en@skaljegtaendemaskinen
+DTSTAMP:20261023T110402Z
+DTSTART:20261024T013000Z
+DTEND:20261024T033000Z
+SUMMARY:Start the tumble dryer
+DESCRIPTION:Cheapest 2 hours: 03:30–05:30.\nSaves 3.80 kr compared to sta
+ rting at 7 pm.\nIf the machine has delay start\, set it to start at 03:30.
  \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
  markup).
 TRANSP:TRANSPARENT

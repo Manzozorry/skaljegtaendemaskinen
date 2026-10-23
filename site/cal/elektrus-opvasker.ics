@@ -10,13 +10,25 @@ REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-elektrus-opvasker-da@skaljegtaendemaskinen
-DTSTAMP:20261023T090007Z
+DTSTAMP:20261023T110402Z
 DTSTART:20261023T101500Z
 DTEND:20261023T131500Z
 SUMMARY:Tænd opvaskeren
 DESCRIPTION:Billigste 3 timer: 12:15–15:15.\nDet sparer 1\,42 kr. i forho
  ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
   gå i gang kl. 12:15.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
+ lselskabets tillæg).
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-10-23-elektrus-opvasker-da@skaljegtaendemaskinen
+DTSTAMP:20261023T110402Z
+DTSTART:20261024T004500Z
+DTEND:20261024T034500Z
+SUMMARY:Tænd opvaskeren
+DESCRIPTION:Billigste 3 timer: 02:45–05:45.\nDet sparer 1\,15 kr. i forho
+ ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
+  gå i gang kl. 02:45.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
  lselskabets tillæg).
 TRANSP:TRANSPARENT
 END:VEVENT

@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//skaljegtaendemaskinen//DA
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Start vaskemaskinen · Øst for Storebælt (gennemsnit)
+X-WR-CALDESC:Billigste tidspunkt hver aften og nat.
+X-WR-TIMEZONE:Europe/Copenhagen
+REFRESH-INTERVAL;VALUE=DURATION:PT4H
+X-PUBLISHED-TTL:PT4H
+BEGIN:VEVENT
+UID:2026-10-22-dk2-snit-vask-da@skaljegtaendemaskinen
+DTSTAMP:20261023T110402Z
+DTSTART:20261023T103000Z
+DTEND:20261023T123000Z
+SUMMARY:Start vaskemaskinen
+DESCRIPTION:Billigste 2 timer: 12:30–14:30.\nDet sparer 1\,44 kr. i forho
+ ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
+  gå i gang kl. 12:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
+ lselskabets tillæg).
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-10-23-dk2-snit-vask-da@skaljegtaendemaskinen
+DTSTAMP:20261023T110402Z
+DTSTART:20261024T013000Z
+DTEND:20261024T033000Z
+SUMMARY:Start vaskemaskinen
+DESCRIPTION:Billigste 2 timer: 03:30–05:30.\nDet sparer 1\,26 kr. i forho
+ ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
+  gå i gang kl. 03:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
+ lselskabets tillæg).
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

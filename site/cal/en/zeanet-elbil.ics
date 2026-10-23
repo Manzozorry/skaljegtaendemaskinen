@@ -10,12 +10,23 @@ REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-10-22-zeanet-elbil-en@skaljegtaendemaskinen
-DTSTAMP:20261023T090007Z
+DTSTAMP:20261023T110402Z
 DTSTART:20261023T090000Z
 DTEND:20261023T150000Z
 SUMMARY:Charge the car
 DESCRIPTION:Cheapest 6 hours: 11:00–17:00.\nSaves 31.92 kr compared to st
  arting at 7 pm.\nSet charging to start at 11:00 in the car app.\nPrices in
+ clude grid tariff\, taxes and VAT (excluding your supplier’s markup).
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-10-23-zeanet-elbil-en@skaljegtaendemaskinen
+DTSTAMP:20261023T110402Z
+DTSTART:20261023T221500Z
+DTEND:20261024T041500Z
+SUMMARY:Charge the car
+DESCRIPTION:Cheapest 6 hours: 00:15–06:15.\nSaves 27.47 kr compared to st
+ arting at 7 pm.\nSet charging to start at 00:15 in the car app.\nPrices in
  clude grid tariff\, taxes and VAT (excluding your supplier’s markup).
 TRANSP:TRANSPARENT
 END:VEVENT
