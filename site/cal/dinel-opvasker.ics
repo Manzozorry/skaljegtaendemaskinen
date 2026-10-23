@@ -4,14 +4,13 @@ PRODID:-//skaljegtaendemaskinen//DA
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Tænd opvaskeren · Dinel
-X-WR-CALDESC:Billigste tidspunkt hver aften og nat. skaljegtændemaskinen.d
- k
+X-WR-CALDESC:Billigste tidspunkt hver aften og nat.
 X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-10-22-dinel-opvasker@skaljegtaendemaskinen
-DTSTAMP:20261023T085644Z
+UID:2026-10-22-dinel-opvasker-da@skaljegtaendemaskinen
+DTSTAMP:20261023T090007Z
 DTSTART:20261023T104500Z
 DTEND:20261023T134500Z
 SUMMARY:Tænd opvaskeren

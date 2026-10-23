@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//skaljegtaendemaskinen//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Start the washing machine · Nord Energi Net
+X-WR-CALDESC:The cheapest time every evening and night.
+X-WR-TIMEZONE:Europe/Copenhagen
+REFRESH-INTERVAL;VALUE=DURATION:PT4H
+X-PUBLISHED-TTL:PT4H
+BEGIN:VEVENT
+UID:2026-10-22-nord-energi-vask-en@skaljegtaendemaskinen
+DTSTAMP:20261023T090007Z
+DTSTART:20261023T103000Z
+DTEND:20261023T123000Z
+SUMMARY:Start the washing machine
+DESCRIPTION:Cheapest 2 hours: 12:30–14:30.\nSaves 1.36 kr compared to sta
+ rting at 7 pm.\nIf the machine has delay start\, set it to start at 12:30.
+ \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
+ markup).
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

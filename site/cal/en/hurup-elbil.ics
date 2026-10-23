@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//skaljegtaendemaskinen//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Charge the car · Hurup Elværk Net
+X-WR-CALDESC:The cheapest time every evening and night.
+X-WR-TIMEZONE:Europe/Copenhagen
+REFRESH-INTERVAL;VALUE=DURATION:PT4H
+X-PUBLISHED-TTL:PT4H
+BEGIN:VEVENT
+UID:2026-10-22-hurup-elbil-en@skaljegtaendemaskinen
+DTSTAMP:20261023T090007Z
+DTSTART:20261022T220000Z
+DTEND:20261023T040000Z
+SUMMARY:Charge the car
+DESCRIPTION:Cheapest 6 hours: 00:00–06:00.\nSaves 44.99 kr compared to st
+ arting at 7 pm.\nSet charging to start at 00:00 in the car app.\nPrices in
+ clude grid tariff\, taxes and VAT (excluding your supplier’s markup).
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

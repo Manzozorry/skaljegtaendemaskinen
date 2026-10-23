@@ -4,14 +4,13 @@ PRODID:-//skaljegtaendemaskinen//DA
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Start tørretumbleren · Elektrus
-X-WR-CALDESC:Billigste tidspunkt hver aften og nat. skaljegtændemaskinen.d
- k
+X-WR-CALDESC:Billigste tidspunkt hver aften og nat.
 X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-10-22-elektrus-tumbler@skaljegtaendemaskinen
-DTSTAMP:20261023T085644Z
+UID:2026-10-22-elektrus-tumbler-da@skaljegtaendemaskinen
+DTSTAMP:20261023T090007Z
 DTSTART:20261023T103000Z
 DTEND:20261023T123000Z
 SUMMARY:Start tørretumbleren

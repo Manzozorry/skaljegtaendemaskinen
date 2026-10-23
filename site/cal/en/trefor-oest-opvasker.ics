@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//skaljegtaendemaskinen//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Turn on the dishwasher · TREFOR El-net Øst
+X-WR-CALDESC:The cheapest time every evening and night.
+X-WR-TIMEZONE:Europe/Copenhagen
+REFRESH-INTERVAL;VALUE=DURATION:PT4H
+X-PUBLISHED-TTL:PT4H
+BEGIN:VEVENT
+UID:2026-10-22-trefor-oest-opvasker-en@skaljegtaendemaskinen
+DTSTAMP:20261023T090007Z
+DTSTART:20261023T101500Z
+DTEND:20261023T131500Z
+SUMMARY:Turn on the dishwasher
+DESCRIPTION:Cheapest 3 hours: 12:15–15:15.\nSaves 1.53 kr compared to sta
+ rting at 7 pm.\nIf the machine has delay start\, set it to start at 12:15.
+ \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
+ markup).
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
