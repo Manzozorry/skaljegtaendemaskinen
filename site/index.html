@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skal jeg tænde maskinen?</title>
+<meta name="description" content="Ja eller nej. Siden regner ud, hvornår strømmen er billigst til opvaskeren, vaskemaskinen, tørretumbleren og elbilen – med nettarif og afgifter.">
+<meta property="og:title" content="Skal jeg tænde opvaskeren?">
+<meta property="og:description" content="Ja eller nej. Med rigtige elpriser, nettarif og afgifter. Svaret skifter hvert kvarter.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#E8EDEF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23FFD400'/%3E%3Cpath d='M9.5 1.5L3.5 9.2h4L6.6 14.5l6-7.7H8.6l.9-5.3z' fill='%230D1B24'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<div class="side">
+
+<header class="top">
+  <a class="logo" href="./">skaljegtændemaskinen.dk</a>
+  <div class="valg-net">
+    <label for="netselskab">Netselskab</label>
+    <select id="netselskab" class="boks"></select>
+    <span id="gaet" class="gaet" hidden>← gæt. Vælg dit.</span>
+  </div>
+</header>
+
+<main>
+  <section class="svar" aria-live="polite">
+    <h1 class="spoergsmaal">Skal jeg tænde <span class="maskinvalg"><span id="maskineord">opvaskeren</span><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M2 5l6 6 6-6" fill="none" stroke="#0D1B24" stroke-width="2.5"/></svg><select id="maskine" aria-label="Vælg maskine"></select></span>?</h1>
+    <p class="stort" id="svar">…</p>
+    <p class="under" id="under">Regner…</p>
+    <p class="replik" id="replik" hidden></p>
+    <p class="note" id="note">Svaret skifter hvert kvarter.</p>
+  </section>
+
+  <section class="raekke">
+    <div class="kort gul">
+      <div class="etiket" id="enhedEtiket">På maskinen</div>
+      <div class="tal" id="enhedTal">–</div>
+      <div class="tekst" id="enhedTekst"></div>
+    </div>
+    <div class="kort">
+      <div class="etiket">Du sparer</div>
+      <div class="tal"><span id="spar">–</span> kr.</div>
+      <div class="tekst" id="sparHale"></div>
+    </div>
+  </section>
+
+  <section class="graf">
+    <div class="graf-top">
+      <span class="etiket" id="grafTitel">Pris · kr/kWh</span>
+      <span id="billigst"></span>
+    </div>
+    <div class="soejler" id="soejler" role="img" aria-label="Elprisen pr. kvarter"></div>
+    <div class="akse" id="akse" aria-hidden="true"></div>
+    <div class="forklaring">
+      <span><i style="background: var(--accent)"></i><span id="vindueTekst">Billigste vindue</span></span>
+      <span><i style="background: var(--soejle-nu)"></i>Nu</span>
+      <span><i style="background: var(--soejle)"></i>Resten</span>
+    </div>
+  </section>
+
+  <section class="raekke">
+    <div class="kort">
+      <h2>Få svaret i kalenderen</h2>
+      <p>Én begivenhed hver aften på det billigste tidspunkt mellem kl. 19 og kl. 17 dagen efter. Ingen app, ingen login.</p>
+      <div class="knapper">
+        <a class="knap moerk" id="kalGoogle" href="#" target="_blank" rel="noopener">Google Kalender</a>
+        <a class="knap" id="kalOutlook" href="#" target="_blank" rel="noopener">Outlook</a>
+        <a class="knap" id="kalIphone" href="#">iPhone</a>
+        <button class="knap" id="kalKopier" type="button">Kopiér link</button>
+      </div>
+      <p class="lille">Google kan være op til et døgn om at hente nye tider. iPhone og Outlook er hurtigere.</p>
+    </div>
+    <div class="kort" id="historik" hidden>
+      <div class="etiket" id="historikEtiket">Hvis du havde fulgt siden</div>
+      <div class="tal"><span id="historikSum">–</span> kr.</div>
+      <p>sparet på opvasken i forhold til at starte den kl. 19 hver aften.</p>
+      <a class="knap gul" id="kwhKnap" href="#" target="_blank" rel="noopener" hidden><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M9.5 1L3 9.2h4.3L6.5 15 13 6.8H8.7L9.5 1z" fill="#0D1B24"/></svg>Køb mig en kilowatttime · 20 kr.</a>
+      <span class="lille" id="kwhNote" hidden>Danmarks dyreste kilowatttime. Med vilje.</span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Priser fra Energi Data Service (Energinet), opdateret <span id="opdateret">–</span>. Inkl. spotpris, nettarif C fra dit netselskab, elafgift, Energinets tariffer og moms. Ekskl. dit elselskabs tillæg og abonnementer.</p>
+  <p id="antagelser"></p>
+  <p>Lavet af en person med en opvaskemaskine. <a href="https://github.com/Manzozorry/skaljegtaendemaskinen">Koden ligger på GitHub.</a></p>
+</footer>
+
+</div>
+<noscript><p style="padding: 16px; font-family: monospace;">Siden skal bruge JavaScript for at regne svaret ud.</p></noscript>
+</body>
+</html>

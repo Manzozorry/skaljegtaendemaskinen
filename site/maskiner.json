@@ -1,0 +1,42 @@
+[
+  {
+    "id": "opvasker",
+    "ord": "opvaskeren",
+    "navn": "Opvasker",
+    "kvarterer": 12,
+    "kwh": 0.9,
+    "styring": "udskudt",
+    "replik": "",
+    "kalender": "Tænd opvaskeren"
+  },
+  {
+    "id": "vask",
+    "ord": "vaskemaskinen",
+    "navn": "Vaskemaskine",
+    "kvarterer": 8,
+    "kwh": 0.7,
+    "styring": "udskudt",
+    "replik": "",
+    "kalender": "Start vaskemaskinen"
+  },
+  {
+    "id": "tumbler",
+    "ord": "tørretumbleren",
+    "navn": "Tørretumbler",
+    "kvarterer": 8,
+    "kwh": 2.2,
+    "styring": "udskudt",
+    "replik": "Eller hæng tøjet ud. Det er gratis.",
+    "kalender": "Start tørretumbleren"
+  },
+  {
+    "id": "elbil",
+    "ord": "laderen",
+    "navn": "Elbil",
+    "kvarterer": 24,
+    "kwh": 30,
+    "styring": "app",
+    "replik": "",
+    "kalender": "Sæt elbilen til at lade"
+  }
+]

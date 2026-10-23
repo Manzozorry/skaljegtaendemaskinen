@@ -1,0 +1,13 @@
+{
+  "name": "skaljegtaendemaskinen",
+  "private": true,
+  "type": "module",
+  "description": "Skal jeg tænde maskinen? Svarer på, hvornår strømmen er billigst.",
+  "scripts": {
+    "opdater": "node scripts/update.mjs",
+    "test": "node scripts/update.mjs --fixtures test/fixtures --nu 2026-10-23T19:40:00Z"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

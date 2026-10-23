@@ -1,0 +1,58 @@
+name: Opdater priser og udgiv
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Morgendagens priser udkommer ved 13-tiden dansk tid. Tiderne her er UTC
+    # og dækker både vinter- og sommertid. Skæve minutter, fordi GitHub ofte
+    # forsinker kørsler, der står på hele timer.
+    - cron: '17 11,12,13 * * *'
+    - cron: '47 11,12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: opdater
+  cancel-in-progress: false
+
+jobs:
+  opdater:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.udgiv.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Hent priser, tariffer og afgifter
+        run: node scripts/update.mjs
+        # Ved en ren kodeændring udgives siden alligevel med de seneste data
+        continue-on-error: ${{ github.event_name == 'push' }}
+
+      - name: Gem data i repoet
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data site/cal
+          if ! git diff --cached --quiet; then
+            git commit -m "Priser $(TZ=Europe/Copenhagen date '+%Y-%m-%d %H:%M')"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: udgiv
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,44 @@
+# Skal jeg tænde maskinen?
+
+En side med ét spørgsmål og ét svar: skal du tænde opvaskeren (eller vaskemaskinen, tørretumbleren, elbilladeren) nu, eller vente til strømmen er billigere?
+
+Svaret regnes ud fra de rigtige priser pr. kvarter: spotpris + nettarif fra dit netselskab + elafgift + Energinets tariffer + moms. Elselskabets eget tillæg er ikke med, men det er det samme hele døgnet og ændrer derfor ikke, hvornår det er billigst.
+
+## Sådan virker det
+
+- `scripts/update.mjs` henter priser fra [Energi Data Service](https://www.energidataservice.dk/) (datasættene `DayAheadPrices` og `DatahubPricelist`) og skriver:
+  - `site/data/latest.json` – priser og tariffer, som siden regner på
+  - `site/data/historik.json` – hvad opvaskeren har sparet siden start
+  - `site/cal/<netselskab>-<maskine>.ics` – kalenderabonnementer
+- `.github/workflows/opdater.yml` kører scriptet hver dag efter kl. 13, når morgendagens priser er udkommet, gemmer data i repoet og udgiver `site/` på GitHub Pages.
+- Siden (`site/`) er ren HTML, CSS og JavaScript. Ingen server, ingen cookies, ingen eksterne skrifttyper.
+- `site/beregn.js` bruges både af siden og af scriptet, så de regner ens.
+
+## Opsætning (én gang)
+
+1. **Settings → Pages → Build and deployment → Source:** vælg **GitHub Actions**.
+2. **Actions → Opdater priser og udgiv → Run workflow** for at hente de første priser.
+3. Siden ligger nu på `https://manzozorry.github.io/skaljegtaendemaskinen/`.
+
+## Ting du selv skal sætte ind
+
+- **Buy Me a Coffee-link:** øverst i `site/app.js`, konstanten `KILOWATTTIME_LINK`. Knappen er skjult, indtil der står et link.
+- **Eget domæne:** Settings → Pages → Custom domain, og peg domænet på GitHub Pages i DNS.
+
+## Kør lokalt
+
+```sh
+npm test            # kører scriptet på testdata i test/fixtures (ikke rigtige priser)
+npm run opdater     # henter rigtige priser (kræver internetadgang til api.energidataservice.dk)
+python3 -m http.server -d site 8000
+```
+
+Testdata i `test/fixtures` er opdigtede priser i samme format som Energi Data Service. Radius' tariffer og afgifterne er rigtige værdier for 2026.
+
+## Netselskaber
+
+Listen står i `scripts/netselskaber.json` (GLN-nummer og tarifkode for nettarif C). Et netselskab uden gyldig tarif bliver automatisk sprunget over. Tarifkoderne stammer fra Home Assistant-integrationen [MTrab/energidataservice](https://github.com/MTrab/energidataservice).
+
+## Skrifttyper
+
+Archivo og IBM Plex Mono, begge under SIL Open Font License (se `site/fonts/`).

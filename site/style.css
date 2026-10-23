@@ -1,0 +1,295 @@
+@font-face {
+  font-family: 'Archivo';
+  src: url('fonts/archivo-latin-wdth-normal.woff2') format('woff2-variations'),
+       url('fonts/archivo-latin-wdth-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plex Mono';
+  src: url('fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plex Mono';
+  src: url('fonts/ibm-plex-mono-latin-600-normal.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --grund: #E8EDEF;
+  --blaek: #0D1B24;
+  --daempet: #4A5A64;
+  --flade: #FFFFFF;
+  --accent: #FFD400;
+  --soejle: #5C6D77;
+  --soejle-nu: #E8EDEF;
+  --graf-tekst: #B9C6CD;
+  --sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--grund);
+  color: var(--blaek);
+  font-family: var(--sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--blaek); }
+a:hover { color: #3A4A54; }
+
+:focus-visible { outline: 3px solid var(--blaek); outline-offset: 3px; }
+
+.side {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* Top */
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 16px;
+  border-bottom: 2px solid var(--blaek);
+  padding-bottom: 16px;
+  font-family: var(--mono);
+  font-size: 14px;
+}
+.logo { font-weight: 600; font-size: 15px; text-decoration: none; }
+.valg-net { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.valg-net label { color: var(--daempet); }
+.gaet { color: var(--daempet); }
+
+select.boks {
+  font-family: var(--mono);
+  font-size: 14px;
+  padding: 8px 10px;
+  min-height: 44px;
+  border: 2px solid var(--blaek);
+  border-radius: 0;
+  background: var(--flade);
+  color: var(--blaek);
+}
+
+main { display: flex; flex-direction: column; gap: 48px; }
+
+/* Svaret */
+.svar { display: flex; flex-direction: column; gap: 8px; }
+
+.spoergsmaal {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.25;
+  font-weight: 700;
+}
+.maskinvalg {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  padding: 2px 0.85em 2px 0;
+  border-bottom: 5px solid var(--accent);
+}
+.maskinvalg svg {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 0.6em;
+  height: 0.6em;
+  transform: translateY(-40%);
+  pointer-events: none;
+}
+.maskinvalg select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  font: inherit;
+  border: 0;
+  margin: 0;
+}
+.maskinvalg:focus-within { outline: 3px solid var(--blaek); outline-offset: 6px; }
+
+.stort {
+  margin: 0;
+  font-size: clamp(96px, 26vw, 260px);
+  line-height: 0.85;
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.02em;
+  animation: ind 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes ind {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stort { animation: none; }
+}
+
+.under {
+  margin: 12px 0 0;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.05;
+  font-weight: 800;
+  font-stretch: 110%;
+}
+.replik {
+  margin: 4px 0 0;
+  font-size: clamp(20px, 2.6vw, 28px);
+  font-weight: 600;
+  color: var(--daempet);
+}
+.note {
+  margin: 8px 0 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--daempet);
+}
+
+/* Kort */
+.raekke {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.kort {
+  background: var(--flade);
+  border: 2px solid var(--blaek);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.kort.gul { background: var(--accent); }
+.etiket {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tal {
+  font-size: clamp(56px, 8vw, 80px);
+  line-height: 1;
+  font-weight: 900;
+  font-stretch: 125%;
+}
+.kort p, .kort .tekst { margin: 0; font-size: 18px; line-height: 1.45; }
+.kort h2 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.05;
+  font-weight: 800;
+  font-stretch: 110%;
+}
+.lille, .kort .lille {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--daempet);
+}
+
+.knapper { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+.knap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 2px solid var(--blaek);
+  border-radius: 0;
+  background: var(--flade);
+  color: var(--blaek);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.knap:hover { background: var(--grund); color: var(--blaek); }
+.knap.moerk { background: var(--blaek); color: #FFFFFF; }
+.knap.moerk:hover { background: #24343E; color: #FFFFFF; }
+.knap.gul { background: var(--accent); font-weight: 800; align-self: flex-start; }
+.knap.gul:hover { background: #F2C800; }
+.knap svg { width: 16px; height: 16px; flex: none; }
+
+/* Graf */
+.graf {
+  background: var(--blaek);
+  color: var(--grund);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.graf-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.graf-top .etiket { letter-spacing: 0.06em; }
+.soejler {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 190px;
+  border-bottom: 1px solid var(--soejle);
+}
+.soejler.taet { gap: 1px; }
+.soejler div { flex: 1 1 0; min-width: 0; background: var(--soejle); }
+.soejler div.nu { background: var(--soejle-nu); }
+.soejler div.vindue { background: var(--accent); }
+.akse {
+  position: relative;
+  height: 16px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--graf-tekst);
+}
+.akse span { position: absolute; top: 0; white-space: nowrap; }
+.forklaring { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; }
+.forklaring span { display: inline-flex; align-items: center; gap: 8px; }
+.forklaring i { display: inline-block; width: 14px; height: 14px; }
+
+/* Bund */
+footer {
+  border-top: 2px solid var(--blaek);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--daempet);
+}
+footer p { margin: 0; max-width: 760px; }
+
+[hidden] { display: none !important; }
+
+@media (max-width: 600px) {
+  .side { padding: 20px 16px 48px; gap: 36px; }
+  main { gap: 36px; }
+  .kort { padding: 20px; }
+  .graf { padding: 16px; }
+  .soejler { height: 140px; }
+}
