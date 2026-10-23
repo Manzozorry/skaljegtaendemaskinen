@@ -20,6 +20,7 @@ const SITE = join(ROD, 'site');
 const API = 'https://api.energidataservice.dk/dataset/';
 const ENERGINET_GLN = '5790000432752';
 const DOMAENE = 'skaljegtaendemaskinen';
+const ADRESSE = 'https://skaljegtaendemaskinen.fun/';
 
 const arg = (navn) => {
   const i = process.argv.indexOf(navn);
@@ -258,7 +259,7 @@ const icsTid = (ms) => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/
 
 const KAL = {
   da: {
-    beskrivelse: 'Billigste tidspunkt hver aften og nat.',
+    beskrivelse: 'Billigste tidspunkt hver aften og nat. skaljegtaendemaskinen.fun',
     billigst: (t, fra, til) => `Billigste ${t} timer: ${fra}–${til}.`,
     sparer: (x) => `Det sparer ${kr(x)} kr. i forhold til at starte kl. 19.`,
     ligesaa: 'Kl. 19 er lige så billigt i aften.',
@@ -267,7 +268,7 @@ const KAL = {
     note: 'Priser inkl. nettarif, afgifter og moms (ekskl. elselskabets tillæg).'
   },
   en: {
-    beskrivelse: 'The cheapest time every evening and night.',
+    beskrivelse: 'The cheapest time every evening and night. skaljegtaendemaskinen.fun',
     billigst: (t, fra, til) => `Cheapest ${t} hours: ${fra}–${til}.`,
     sparer: (x) => `Saves ${(Math.round(x * 100) / 100).toFixed(2)} kr compared to starting at 7 pm.`,
     ligesaa: '7 pm is just as cheap tonight.',
@@ -310,6 +311,7 @@ function kalender(ns, m, begivenheder, sprog) {
       `DTEND:${icsTid(b.slut)}`,
       `SUMMARY:${tekst(navn)}`,
       `DESCRIPTION:${tekst(beskrivelse)}`,
+      `URL:${ADRESSE}`,
       'TRANSP:TRANSPARENT',
       'END:VEVENT'
     );

@@ -161,7 +161,10 @@ function render() {
 
   saet('svar', ja ? T.ja : T.nej);
   const kunIdag = lokal(alle[alle.length - 1].t).dato === lokal(nu).dato;
-  saet('note', kunIdag ? T.noteKunIdag : T.noteKvarter);
+  const gammel = nu - opd > 30 * 3600000;
+  saet('note', gammel
+    ? T.gamlePriser(T.opdateret(fmt.dato.format(opd), klokken(opd)))
+    : kunIdag ? T.noteKunIdag : T.noteKvarter);
 
   if (ja && nuPris.pris < 0) saet('under', T.betalerHelt);
   else if (ja && nuPris.spot < 0) saet('under', T.betalerNaesten);
@@ -182,7 +185,17 @@ function render() {
     saet('enhedTal', T.start);
     saet('enhedTekst', T.ingenGrund);
   } else {
-    const t = Math.round(vent / 3600000);
+    // Udskudt start går i hele timer. Vælg den af de to nærmeste, der faktisk er billigst,
+    // så maskinen ikke ryger ind i en dyrere time ved en ren afrunding.
+    const raa = vent / 3600000;
+    let t = Math.round(raa);
+    let bedstG = Infinity;
+    for (const k of new Set([Math.floor(raa), Math.ceil(raa)])) {
+      if (k < 1 || k > 24) continue;
+      const ik = indeksVed(priser, nu + k * 3600000);
+      const g = ik >= 0 ? snit(priser, ik, n) : null;
+      if (g !== null && g < bedstG) { bedstG = g; t = k; }
+    }
     saet('enhedEtiket', T.paaMaskinen);
     if (t < 1) {
       saet('enhedTal', T.minutter(Math.max(1, Math.round(vent / 60000))));

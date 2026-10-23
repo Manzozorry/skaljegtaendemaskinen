@@ -70,9 +70,9 @@ a:hover { color: #3A4A54; }
   font-size: 14px;
 }
 .logo { font-weight: 600; font-size: 15px; text-decoration: none; }
-.valg-net { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.valg-net { order: 2; flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
 .valg-net label { color: var(--daempet); }
-.gaet { color: var(--daempet); }
+.gaet { color: var(--daempet); font-size: 13px; }
 
 .sprog { display: inline-flex; }
 .sprogknap {
@@ -348,7 +348,14 @@ footer p { margin: 0; max-width: 760px; }
 [hidden] { display: none !important; }
 
 @media (max-width: 600px) {
-  .side { padding: 20px 16px 48px; gap: 36px; }
+  .side { padding: 16px 16px 48px; gap: 32px; }
+  .top { gap: 8px 12px; padding-bottom: 12px; }
+  .logo { font-size: 13px; }
+  .sprogknap { min-width: 40px; min-height: 40px; }
+  .valg-net { gap: 4px 8px; }
+  .valg-net label { flex-basis: 100%; font-size: 12px; }
+  .valg-net select.boks { flex: 1 1 100%; max-width: 100%; }
+  .gaet { font-size: 12px; }
   main { gap: 36px; }
   .kort { padding: 20px; }
   .graf { padding: 16px; }

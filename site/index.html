@@ -3,13 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Skal jeg tænde maskinen? · Should I turn it on?</title>
-<meta name="description" content="Ja eller nej: hvornår er strømmen billigst til opvaskeren? Yes or no: when is electricity cheapest for your dishwasher in Denmark? Med nettarif og afgifter / with grid tariffs and taxes.">
-<meta property="og:title" content="Skal jeg tænde opvaskeren? · Should I turn on the dishwasher?">
-<meta property="og:description" content="Ja eller nej. Yes or no. Danske elpriser pr. kvarter med nettarif og afgifter.">
+<title>Skal jeg tænde opvaskeren? · skaljegtaendemaskinen.fun</title>
+<meta name="description" content="Ja eller nej: skal du tænde opvaskeren nu, eller vente til strømmen er billigere? Rigtige elpriser pr. kvarter med nettarif og afgifter. Also in English.">
+<link rel="canonical" href="https://skaljegtaendemaskinen.fun/">
+<meta property="og:site_name" content="skaljegtaendemaskinen.fun">
+<meta property="og:title" content="Skal jeg tænde opvaskeren?">
+<meta property="og:description" content="Ja eller nej. Siden regner ud, hvornår strømmen er billigst – med nettarif og afgifter. Svaret skifter hvert kvarter.">
+<meta property="og:url" content="https://skaljegtaendemaskinen.fun/">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="da_DK">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://skaljegtaendemaskinen.fun/deling.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Skal jeg tænde opvaskeren? NEJ. Vent til 02:45.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#E8EDEF">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23FFD400'/%3E%3Cpath d='M9.5 1.5L3.5 9.2h4L6.6 14.5l6-7.7H8.6l.9-5.3z' fill='%230D1B24'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script type="module" src="app.js"></script>
@@ -18,15 +30,15 @@
 <div class="side">
 
 <header class="top">
-  <a class="logo" href="./" data-t="sidenavn">Skal jeg tænde maskinen?</a>
+  <a class="logo" href="./" data-t="sidenavn">skaljegtaendemaskinen.fun</a>
+  <span class="sprog" role="group" aria-label="Sprog / Language">
+    <button type="button" class="sprogknap" data-sprog="da" lang="da">DA</button>
+    <button type="button" class="sprogknap" data-sprog="en" lang="en">EN</button>
+  </span>
   <div class="valg-net">
-    <label for="netselskab" data-t="netselskab">Netselskab</label>
+    <label for="netselskab" data-t="netselskab">Hvor bor du?</label>
     <select id="netselskab" class="boks"></select>
-    <span class="sprog" role="group" aria-label="Sprog / Language">
-      <button type="button" class="sprogknap" data-sprog="da" lang="da">DA</button>
-      <button type="button" class="sprogknap" data-sprog="en" lang="en">EN</button>
-    </span>
-    <span id="gaet" class="gaet" data-t="gaet" hidden>← et gæt. Dit står på elregningen.</span>
+    <span id="gaet" class="gaet" data-t="gaet" hidden>Et gæt. Vælg dit netselskab for det præcise svar.</span>
   </div>
 </header>
 

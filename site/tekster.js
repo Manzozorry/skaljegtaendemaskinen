@@ -4,12 +4,12 @@
 export const tekster = {
   da: {
     locale: 'da-DK',
-    sidenavn: 'Skal jeg tænde maskinen?',
+    sidenavn: 'skaljegtaendemaskinen.fun',
     titel: (ord) => `Skal jeg tænde ${ord}?`,
     spoergFoer: 'Skal jeg tænde ',
     vaelgMaskine: 'Vælg maskine',
     netselskab: 'Hvor bor du?',
-    gaet: '← et gæt. Vælg dit netselskab for det præcise svar.',
+    gaet: 'Et gæt. Vælg dit netselskab for det præcise svar.',
     snitDK2: 'Øst for Storebælt · gennemsnit',
     snitDK1: 'Vest for Storebælt · gennemsnit',
     oest: 'Netselskaber øst for Storebælt',
@@ -32,6 +32,7 @@ export const tekster = {
     noteMangler: 'Morgendagens priser kommer ved 13-tiden. Prøv igen lidt senere.',
     kunneIkkeHente: 'Jeg kunne ikke hente priserne.',
     proevIgen: 'Prøv at genindlæse siden om lidt.',
+    gamlePriser: (dato) => `Priserne er ikke blevet opdateret siden ${dato}. Svaret kan være forkert.`,
 
     paaMaskinen: 'På maskinen',
     iBilensApp: 'I bilens app',
@@ -95,12 +96,12 @@ export const tekster = {
 
   en: {
     locale: 'en-GB',
-    sidenavn: 'Should I turn it on?',
+    sidenavn: 'skaljegtaendemaskinen.fun',
     titel: (ord) => `Should I turn on ${ord}?`,
     spoergFoer: 'Should I turn on ',
     vaelgMaskine: 'Choose appliance',
     netselskab: 'Where do you live?',
-    gaet: '← a guess. Pick your grid company for the exact answer.',
+    gaet: 'A guess. Pick your grid company for the exact answer.',
     snitDK2: 'Zealand and Copenhagen · average',
     snitDK1: 'Jutland and Funen · average',
     oest: 'Grid companies on Zealand',
@@ -123,6 +124,7 @@ export const tekster = {
     noteMangler: 'Tomorrow’s prices arrive around 1 pm. Try again a bit later.',
     kunneIkkeHente: 'I couldn’t fetch the prices.',
     proevIgen: 'Try reloading the page in a bit.',
+    gamlePriser: (dato) => `Prices haven’t been updated since ${dato}. The answer may be off.`,
 
     paaMaskinen: 'On the machine',
     iBilensApp: 'In the car app',
