@@ -10,12 +10,12 @@ X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-10-23-kongerslev-vask-da@skaljegtaendemaskinen
-DTSTAMP:20261024T145453Z
-DTSTART:20261024T013000Z
-DTEND:20261024T033000Z
+UID:2026-10-24-kongerslev-vask-da@skaljegtaendemaskinen
+DTSTAMP:20261025T145803Z
+DTSTART:20261025T023000Z
+DTEND:20261025T043000Z
 SUMMARY:Start vaskemaskinen
-DESCRIPTION:Billigste 2 timer: 03:30–05:30.\nDet sparer 1\,21 kr. i forho
+DESCRIPTION:Billigste 2 timer: 03:30–05:30.\nDet sparer 1\,12 kr. i forho
  ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
   gå i gang kl. 03:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
  lselskabets tillæg).
@@ -23,14 +23,14 @@ URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-24-kongerslev-vask-da@skaljegtaendemaskinen
-DTSTAMP:20261024T145453Z
-DTSTART:20261025T023000Z
-DTEND:20261025T043000Z
+UID:2026-10-25-kongerslev-vask-da@skaljegtaendemaskinen
+DTSTAMP:20261025T145803Z
+DTSTART:20261026T014500Z
+DTEND:20261026T034500Z
 SUMMARY:Start vaskemaskinen
-DESCRIPTION:Billigste 2 timer: 03:30–05:30.\nDet sparer 1\,12 kr. i forho
+DESCRIPTION:Billigste 2 timer: 02:45–04:45.\nDet sparer 0\,77 kr. i forho
  ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
-  gå i gang kl. 03:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
+  gå i gang kl. 02:45.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
  lselskabets tillæg).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
