@@ -10,27 +10,27 @@ X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-10-24-trefor-oest-vask-da@skaljegtaendemaskinen
-DTSTAMP:20261025T150407Z
-DTSTART:20261025T030000Z
-DTEND:20261025T050000Z
-SUMMARY:Start vaskemaskinen
-DESCRIPTION:Billigste 2 timer: 04:00–06:00.\nDet sparer 1\,16 kr. i forho
- ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
-  gå i gang kl. 04:00.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
- lselskabets tillæg).
-URL:https://www.skaljegtaendemaskinen.fun/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:2026-10-25-trefor-oest-vask-da@skaljegtaendemaskinen
-DTSTAMP:20261025T150407Z
+DTSTAMP:20261026T172402Z
 DTSTART:20261026T014500Z
 DTEND:20261026T034500Z
 SUMMARY:Start vaskemaskinen
 DESCRIPTION:Billigste 2 timer: 02:45–04:45.\nDet sparer 0\,83 kr. i forho
  ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
   gå i gang kl. 02:45.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
+ lselskabets tillæg).
+URL:https://www.skaljegtaendemaskinen.fun/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-10-26-trefor-oest-vask-da@skaljegtaendemaskinen
+DTSTAMP:20261026T172402Z
+DTSTART:20261027T024500Z
+DTEND:20261027T044500Z
+SUMMARY:Start vaskemaskinen
+DESCRIPTION:Billigste 2 timer: 03:45–05:45.\nDet sparer 1\,45 kr. i forho
+ ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
+  gå i gang kl. 03:45.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
  lselskabets tillæg).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
