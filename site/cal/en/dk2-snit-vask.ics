@@ -10,26 +10,26 @@ X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-10-27-dk2-snit-vask-en@skaljegtaendemaskinen
-DTSTAMP:20261028T172706Z
-DTSTART:20261027T230000Z
-DTEND:20261028T010000Z
+UID:2026-10-28-dk2-snit-vask-en@skaljegtaendemaskinen
+DTSTAMP:20261029T172652Z
+DTSTART:20261029T010000Z
+DTEND:20261029T030000Z
 SUMMARY:Start the washing machine
-DESCRIPTION:Cheapest 2 hours: 00:00–02:00.\nSaves 0.61 kr compared to sta
- rting at 7 pm.\nIf the machine has delay start\, set it to start at 00:00.
+DESCRIPTION:Cheapest 2 hours: 02:00–04:00.\nSaves 1.08 kr compared to sta
+ rting at 7 pm.\nIf the machine has delay start\, set it to start at 02:00.
  \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
  markup).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-28-dk2-snit-vask-en@skaljegtaendemaskinen
-DTSTAMP:20261028T172706Z
-DTSTART:20261029T010000Z
-DTEND:20261029T030000Z
+UID:2026-10-29-dk2-snit-vask-en@skaljegtaendemaskinen
+DTSTAMP:20261029T172652Z
+DTSTART:20261030T014500Z
+DTEND:20261030T034500Z
 SUMMARY:Start the washing machine
-DESCRIPTION:Cheapest 2 hours: 02:00–04:00.\nSaves 1.08 kr compared to sta
- rting at 7 pm.\nIf the machine has delay start\, set it to start at 02:00.
+DESCRIPTION:Cheapest 2 hours: 02:45–04:45.\nSaves 1.67 kr compared to sta
+ rting at 7 pm.\nIf the machine has delay start\, set it to start at 02:45.
  \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
  markup).
 URL:https://www.skaljegtaendemaskinen.fun/
