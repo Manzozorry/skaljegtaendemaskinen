@@ -10,24 +10,24 @@ X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-11-02-tarm-elbil-en@skaljegtaendemaskinen
-DTSTAMP:20261103T184016Z
-DTSTART:20261102T230000Z
-DTEND:20261103T050000Z
+UID:2026-11-03-tarm-elbil-en@skaljegtaendemaskinen
+DTSTAMP:20261104T183918Z
+DTSTART:20261103T230000Z
+DTEND:20261104T050000Z
 SUMMARY:Charge the car
-DESCRIPTION:Cheapest 6 hours: 00:00–06:00.\nSaves 18.80 kr compared to st
+DESCRIPTION:Cheapest 6 hours: 00:00–06:00.\nSaves 20.29 kr compared to st
  arting at 7 pm.\nSet charging to start at 00:00 in the car app.\nPrices in
  clude grid tariff\, taxes and VAT (excluding your supplier’s markup).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-03-tarm-elbil-en@skaljegtaendemaskinen
-DTSTAMP:20261103T184016Z
-DTSTART:20261103T230000Z
-DTEND:20261104T050000Z
+UID:2026-11-04-tarm-elbil-en@skaljegtaendemaskinen
+DTSTAMP:20261104T183918Z
+DTSTART:20261104T230000Z
+DTEND:20261105T050000Z
 SUMMARY:Charge the car
-DESCRIPTION:Cheapest 6 hours: 00:00–06:00.\nSaves 20.29 kr compared to st
+DESCRIPTION:Cheapest 6 hours: 00:00–06:00.\nSaves 20.58 kr compared to st
  arting at 7 pm.\nSet charging to start at 00:00 in the car app.\nPrices in
  clude grid tariff\, taxes and VAT (excluding your supplier’s markup).
 URL:https://www.skaljegtaendemaskinen.fun/
