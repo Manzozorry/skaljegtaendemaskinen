@@ -10,25 +10,25 @@ X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-11-04-konstant-tumbler-en@skaljegtaendemaskinen
-DTSTAMP:20261105T190343Z
-DTSTART:20261104T230000Z
-DTEND:20261105T013000Z
+UID:2026-11-05-konstant-tumbler-en@skaljegtaendemaskinen
+DTSTAMP:20261106T175845Z
+DTSTART:20261106T013000Z
+DTEND:20261106T040000Z
 SUMMARY:Start the tumble dryer
-DESCRIPTION:Cheapest 2.5 hours: 00:00–02:30.\nSaves 1.81 kr compared to s
- tarting at 7 pm.\nIf the machine has delay start\, set it to start at 00:0
+DESCRIPTION:Cheapest 2.5 hours: 02:30–05:00.\nSaves 2.05 kr compared to s
+ tarting at 7 pm.\nIf the machine has delay start\, set it to start at 02:3
  0.\nPrices include grid tariff\, taxes and VAT (excluding your supplier’
  s markup).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-05-konstant-tumbler-en@skaljegtaendemaskinen
-DTSTAMP:20261105T190343Z
-DTSTART:20261106T013000Z
-DTEND:20261106T040000Z
+UID:2026-11-06-konstant-tumbler-en@skaljegtaendemaskinen
+DTSTAMP:20261106T175845Z
+DTSTART:20261107T013000Z
+DTEND:20261107T040000Z
 SUMMARY:Start the tumble dryer
-DESCRIPTION:Cheapest 2.5 hours: 02:30–05:00.\nSaves 2.05 kr compared to s
+DESCRIPTION:Cheapest 2.5 hours: 02:30–05:00.\nSaves 1.98 kr compared to s
  tarting at 7 pm.\nIf the machine has delay start\, set it to start at 02:3
  0.\nPrices include grid tariff\, taxes and VAT (excluding your supplier’
  s markup).
