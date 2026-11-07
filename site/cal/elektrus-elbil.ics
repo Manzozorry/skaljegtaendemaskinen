@@ -10,25 +10,25 @@ X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-11-05-elektrus-elbil-da@skaljegtaendemaskinen
-DTSTAMP:20261106T183107Z
-DTSTART:20261105T230000Z
-DTEND:20261106T050000Z
-SUMMARY:Sæt elbilen til at lade
-DESCRIPTION:Billigste 6 timer: 00:00–06:00.\nDet sparer 21\,62 kr. i forh
- old til at starte kl. 19.\nSæt ladestart til 00:00 i bilens app.\nPriser 
- inkl. nettarif\, afgifter og moms (ekskl. elselskabets tillæg).
-URL:https://www.skaljegtaendemaskinen.fun/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:2026-11-06-elektrus-elbil-da@skaljegtaendemaskinen
-DTSTAMP:20261106T183107Z
+DTSTAMP:20261107T165037Z
 DTSTART:20261106T234500Z
 DTEND:20261107T054500Z
 SUMMARY:Sæt elbilen til at lade
 DESCRIPTION:Billigste 6 timer: 00:45–06:45.\nDet sparer 20\,74 kr. i forh
  old til at starte kl. 19.\nSæt ladestart til 00:45 i bilens app.\nPriser 
+ inkl. nettarif\, afgifter og moms (ekskl. elselskabets tillæg).
+URL:https://www.skaljegtaendemaskinen.fun/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-07-elektrus-elbil-da@skaljegtaendemaskinen
+DTSTAMP:20261107T165037Z
+DTSTART:20261108T001500Z
+DTEND:20261108T061500Z
+SUMMARY:Sæt elbilen til at lade
+DESCRIPTION:Billigste 6 timer: 01:15–07:15.\nDet sparer 21\,06 kr. i forh
+ old til at starte kl. 19.\nSæt ladestart til 01:15 i bilens app.\nPriser 
  inkl. nettarif\, afgifter og moms (ekskl. elselskabets tillæg).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
