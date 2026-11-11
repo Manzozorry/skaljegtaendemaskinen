@@ -10,27 +10,27 @@ X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-11-09-dk1-snit-opvasker-da@skaljegtaendemaskinen
-DTSTAMP:20261110T185317Z
-DTSTART:20261110T003000Z
-DTEND:20261110T033000Z
-SUMMARY:Tænd opvaskeren
-DESCRIPTION:Billigste 3 timer: 01:30–04:30.\nDet sparer 1\,76 kr. i forho
- ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
-  gå i gang kl. 01:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
- lselskabets tillæg).
-URL:https://www.skaljegtaendemaskinen.fun/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:2026-11-10-dk1-snit-opvasker-da@skaljegtaendemaskinen
-DTSTAMP:20261110T185317Z
+DTSTAMP:20261111T184245Z
 DTSTART:20261111T013000Z
 DTEND:20261111T043000Z
 SUMMARY:Tænd opvaskeren
 DESCRIPTION:Billigste 3 timer: 02:30–05:30.\nDet sparer 1\,53 kr. i forho
  ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
   gå i gang kl. 02:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
+ lselskabets tillæg).
+URL:https://www.skaljegtaendemaskinen.fun/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-11-dk1-snit-opvasker-da@skaljegtaendemaskinen
+DTSTAMP:20261111T184245Z
+DTSTART:20261112T020000Z
+DTEND:20261112T050000Z
+SUMMARY:Tænd opvaskeren
+DESCRIPTION:Billigste 3 timer: 03:00–06:00.\nDet sparer 1\,85 kr. i forho
+ ld til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til at
+  gå i gang kl. 03:00.\nPriser inkl. nettarif\, afgifter og moms (ekskl. e
  lselskabets tillæg).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
