@@ -20,10 +20,10 @@
    "elbil": "2026-11-02"
   },
   "trefor-oest": {
-   "opvasker": "2026-11-02",
-   "vask": "2026-11-02",
-   "tumbler": "2026-11-02",
-   "elbil": "2026-11-02"
+   "opvasker": "2026-11-12",
+   "vask": "2026-11-12",
+   "tumbler": "2026-11-12",
+   "elbil": "2026-11-12"
   },
   "elektrus": {
    "opvasker": "2026-11-12",
@@ -44,10 +44,10 @@
    "elbil": "2026-11-02"
   },
   "trefor": {
-   "opvasker": "2026-11-02",
-   "vask": "2026-11-02",
-   "tumbler": "2026-11-02",
-   "elbil": "2026-11-02"
+   "opvasker": "2026-11-12",
+   "vask": "2026-11-12",
+   "tumbler": "2026-11-12",
+   "elbil": "2026-11-12"
   },
   "konstant": {
    "opvasker": "2026-11-12",
@@ -68,10 +68,10 @@
    "elbil": "2026-11-02"
   },
   "elnet-midt": {
-   "opvasker": "2026-11-02",
-   "vask": "2026-11-02",
-   "tumbler": "2026-11-02",
-   "elbil": "2026-11-02"
+   "opvasker": "2026-11-12",
+   "vask": "2026-11-12",
+   "tumbler": "2026-11-12",
+   "elbil": "2026-11-12"
   },
   "rah": {
    "opvasker": "2026-11-12",
@@ -110,10 +110,10 @@
    "opvasker": "2026-10-22"
   },
   "veksel": {
-   "opvasker": "2026-11-02",
-   "vask": "2026-11-02",
-   "tumbler": "2026-11-02",
-   "elbil": "2026-11-02"
+   "opvasker": "2026-11-12",
+   "vask": "2026-11-12",
+   "tumbler": "2026-11-12",
+   "elbil": "2026-11-12"
   },
   "ikast": {
    "opvasker": "2026-10-22"
@@ -131,10 +131,10 @@
    "elbil": "2026-11-02"
   },
   "kongerslev": {
-   "opvasker": "2026-11-02",
-   "vask": "2026-11-02",
-   "tumbler": "2026-11-02",
-   "elbil": "2026-11-02"
+   "opvasker": "2026-11-12",
+   "vask": "2026-11-12",
+   "tumbler": "2026-11-12",
+   "elbil": "2026-11-12"
   },
   "tarm": {
    "opvasker": "2026-11-12",
@@ -155,10 +155,10 @@
    "elbil": "2026-11-02"
   },
   "sunds": {
-   "opvasker": "2026-11-02",
-   "vask": "2026-11-02",
-   "tumbler": "2026-11-02",
-   "elbil": "2026-11-02"
+   "opvasker": "2026-11-12",
+   "vask": "2026-11-12",
+   "tumbler": "2026-11-12",
+   "elbil": "2026-11-12"
   },
   "aal": {
    "opvasker": "2026-10-22"
@@ -193,10 +193,10 @@
    "elbil": 314.8951
   },
   "trefor-oest": {
-   "opvasker": 14.3758,
-   "vask": 14.2104,
-   "tumbler": 27.0148,
-   "elbil": 282.8677
+   "opvasker": 17.6514,
+   "vask": 17.3583,
+   "tumbler": 33.065,
+   "elbil": 345.4219
   },
   "elektrus": {
    "opvasker": 23.3961,
@@ -217,10 +217,10 @@
    "elbil": 268.8158
   },
   "trefor": {
-   "opvasker": 10.0145,
-   "vask": 9.7013,
-   "tumbler": 18.7152,
-   "elbil": 199.8223
+   "opvasker": 12.6749,
+   "vask": 12.1716,
+   "tumbler": 23.5738,
+   "elbil": 252.4818
   },
   "konstant": {
    "opvasker": 22.4236,
@@ -241,10 +241,10 @@
    "elbil": 251.8082
   },
   "elnet-midt": {
-   "opvasker": 13.2546,
-   "vask": 13.084,
-   "tumbler": 24.854,
-   "elbil": 263.5818
+   "opvasker": 16.3522,
+   "vask": 16.0276,
+   "tumbler": 30.5471,
+   "elbil": 323.0323
   },
   "rah": {
    "opvasker": 24.6325,
@@ -283,10 +283,10 @@
    "opvasker": 1.1326
   },
   "veksel": {
-   "opvasker": 13.8551,
-   "vask": 13.7143,
-   "tumbler": 25.9965,
-   "elbil": 275.5005
+   "opvasker": 17.0389,
+   "vask": 16.7517,
+   "tumbler": 31.8562,
+   "elbil": 336.4357
   },
   "ikast": {
    "opvasker": 1.1326
@@ -304,10 +304,10 @@
    "elbil": 237.6447
   },
   "kongerslev": {
-   "opvasker": 13.518,
-   "vask": 13.3607,
-   "tumbler": 25.3546,
-   "elbil": 268.8087
+   "opvasker": 16.6535,
+   "vask": 16.3454,
+   "tumbler": 31.1208,
+   "elbil": 328.9107
   },
   "tarm": {
    "opvasker": 24.8482,
@@ -328,10 +328,10 @@
    "elbil": 218.4906
   },
   "sunds": {
-   "opvasker": 13.8621,
-   "vask": 13.7216,
-   "tumbler": 26.0098,
-   "elbil": 275.6412
+   "opvasker": 17.0469,
+   "vask": 16.76,
+   "tumbler": 31.8714,
+   "elbil": 336.5933
   },
   "aal": {
    "opvasker": 1.0891
