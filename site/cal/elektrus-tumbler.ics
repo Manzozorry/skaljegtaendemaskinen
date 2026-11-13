@@ -10,27 +10,27 @@ X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-11-11-elektrus-tumbler-da@skaljegtaendemaskinen
-DTSTAMP:20261112T185714Z
-DTSTART:20261112T020000Z
-DTEND:20261112T043000Z
-SUMMARY:Start tørretumbleren
-DESCRIPTION:Billigste 2.5 timer: 03:00–05:30.\nDet sparer 2\,93 kr. i for
- hold til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til 
- at gå i gang kl. 03:00.\nPriser inkl. nettarif\, afgifter og moms (ekskl.
-  elselskabets tillæg).
-URL:https://www.skaljegtaendemaskinen.fun/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:2026-11-12-elektrus-tumbler-da@skaljegtaendemaskinen
-DTSTAMP:20261112T185714Z
+DTSTAMP:20261113T183213Z
 DTSTART:20261113T094500Z
 DTEND:20261113T121500Z
 SUMMARY:Start tørretumbleren
 DESCRIPTION:Billigste 2.5 timer: 10:45–13:15.\nDet sparer 1\,84 kr. i for
  hold til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til 
  at gå i gang kl. 10:45.\nPriser inkl. nettarif\, afgifter og moms (ekskl.
+  elselskabets tillæg).
+URL:https://www.skaljegtaendemaskinen.fun/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-13-elektrus-tumbler-da@skaljegtaendemaskinen
+DTSTAMP:20261113T183213Z
+DTSTART:20261114T100000Z
+DTEND:20261114T123000Z
+SUMMARY:Start tørretumbleren
+DESCRIPTION:Billigste 2.5 timer: 11:00–13:30.\nDet sparer 0\,49 kr. i for
+ hold til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til 
+ at gå i gang kl. 11:00.\nPriser inkl. nettarif\, afgifter og moms (ekskl.
   elselskabets tillæg).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
