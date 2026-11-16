@@ -26,10 +26,10 @@
    "elbil": "2026-11-15"
   },
   "elektrus": {
-   "opvasker": "2026-11-15",
-   "vask": "2026-11-15",
-   "tumbler": "2026-11-15",
-   "elbil": "2026-11-15"
+   "opvasker": "2026-11-16",
+   "vask": "2026-11-16",
+   "tumbler": "2026-11-16",
+   "elbil": "2026-11-16"
   },
   "zeanet": {
    "opvasker": "2026-11-02",
@@ -50,10 +50,10 @@
    "elbil": "2026-11-15"
   },
   "konstant": {
-   "opvasker": "2026-11-15",
-   "vask": "2026-11-15",
-   "tumbler": "2026-11-15",
-   "elbil": "2026-11-15"
+   "opvasker": "2026-11-16",
+   "vask": "2026-11-16",
+   "tumbler": "2026-11-16",
+   "elbil": "2026-11-16"
   },
   "dinel": {
    "opvasker": "2026-11-02",
@@ -74,10 +74,10 @@
    "elbil": "2026-11-15"
   },
   "rah": {
-   "opvasker": "2026-11-15",
-   "vask": "2026-11-15",
-   "tumbler": "2026-11-15",
-   "elbil": "2026-11-15"
+   "opvasker": "2026-11-16",
+   "vask": "2026-11-16",
+   "tumbler": "2026-11-16",
+   "elbil": "2026-11-16"
   },
   "nord-energi": {
    "opvasker": "2026-11-02",
@@ -95,10 +95,10 @@
    "opvasker": "2026-10-22"
   },
   "ravdex": {
-   "opvasker": "2026-11-15",
-   "vask": "2026-11-15",
-   "tumbler": "2026-11-15",
-   "elbil": "2026-11-15"
+   "opvasker": "2026-11-16",
+   "vask": "2026-11-16",
+   "tumbler": "2026-11-16",
+   "elbil": "2026-11-16"
   },
   "elvaerk": {
    "opvasker": "2026-11-02",
@@ -137,10 +137,10 @@
    "elbil": "2026-11-15"
   },
   "tarm": {
-   "opvasker": "2026-11-15",
-   "vask": "2026-11-15",
-   "tumbler": "2026-11-15",
-   "elbil": "2026-11-15"
+   "opvasker": "2026-11-16",
+   "vask": "2026-11-16",
+   "tumbler": "2026-11-16",
+   "elbil": "2026-11-16"
   },
   "l-net": {
    "opvasker": "2026-11-10",
@@ -167,16 +167,16 @@
    "opvasker": "2026-10-22"
   },
   "dk2-snit": {
-   "opvasker": "2026-11-15",
-   "vask": "2026-11-15",
-   "tumbler": "2026-11-15",
-   "elbil": "2026-11-15"
+   "opvasker": "2026-11-16",
+   "vask": "2026-11-16",
+   "tumbler": "2026-11-16",
+   "elbil": "2026-11-16"
   },
   "dk1-snit": {
-   "opvasker": "2026-11-15",
-   "vask": "2026-11-15",
-   "tumbler": "2026-11-15",
-   "elbil": "2026-11-15"
+   "opvasker": "2026-11-16",
+   "vask": "2026-11-16",
+   "tumbler": "2026-11-16",
+   "elbil": "2026-11-16"
   }
  },
  "sum": {
@@ -199,10 +199,10 @@
    "elbil": 389.673
   },
   "elektrus": {
-   "opvasker": 25.0384,
-   "vask": 24.3133,
-   "tumbler": 46.8237,
-   "elbil": 487.2739
+   "opvasker": 25.6829,
+   "vask": 24.9596,
+   "tumbler": 48.0417,
+   "elbil": 499.3178
   },
   "zeanet": {
    "opvasker": 12.5915,
@@ -223,10 +223,10 @@
    "elbil": 286.7501
   },
   "konstant": {
-   "opvasker": 24.2667,
-   "vask": 23.4068,
-   "tumbler": 45.1674,
-   "elbil": 483.7574
+   "opvasker": 24.991,
+   "vask": 24.1473,
+   "tumbler": 46.543,
+   "elbil": 497.4825
   },
   "dinel": {
    "opvasker": 11.4573,
@@ -247,10 +247,10 @@
    "elbil": 365.4719
   },
   "rah": {
-   "opvasker": 26.7202,
-   "vask": 25.9786,
-   "tumbler": 49.8281,
-   "elbil": 530.4181
+   "opvasker": 27.5493,
+   "vask": 26.8278,
+   "tumbler": 51.4016,
+   "elbil": 546.2286
   },
   "nord-energi": {
    "opvasker": 12.362,
@@ -268,10 +268,10 @@
    "opvasker": 1.43
   },
   "ravdex": {
-   "opvasker": 30.2746,
-   "vask": 29.725,
-   "tumbler": 56.5935,
-   "elbil": 600.272
+   "opvasker": 31.2542,
+   "vask": 30.7303,
+   "tumbler": 58.4513,
+   "elbil": 619.079
   },
   "elvaerk": {
    "opvasker": 14.7818,
@@ -310,10 +310,10 @@
    "elbil": 372.0124
   },
   "tarm": {
-   "opvasker": 26.9596,
-   "vask": 26.2306,
-   "tumbler": 50.2833,
-   "elbil": 535.0307
+   "opvasker": 27.7988,
+   "vask": 27.0903,
+   "tumbler": 51.8759,
+   "elbil": 551.0427
   },
   "l-net": {
    "opvasker": 15.5034,
@@ -340,16 +340,16 @@
    "opvasker": 1.1326
   },
   "dk2-snit": {
-   "opvasker": 27.7792,
-   "vask": 27.1179,
-   "tumbler": 51.9811,
-   "elbil": 542.6342
+   "opvasker": 28.4237,
+   "vask": 27.7642,
+   "tumbler": 53.1991,
+   "elbil": 554.6781
   },
   "dk1-snit": {
-   "opvasker": 28.2822,
-   "vask": 27.6149,
-   "tumbler": 52.7929,
-   "elbil": 561.1403
+   "opvasker": 29.1253,
+   "vask": 28.4785,
+   "tumbler": 54.3928,
+   "elbil": 577.229
   }
  }
 }
