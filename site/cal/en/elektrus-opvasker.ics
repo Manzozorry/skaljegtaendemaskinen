@@ -10,26 +10,26 @@ X-WR-TIMEZONE:Europe/Copenhagen
 REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
-UID:2026-11-16-elektrus-opvasker-en@skaljegtaendemaskinen
-DTSTAMP:20261117T200347Z
-DTSTART:20261117T013000Z
-DTEND:20261117T043000Z
+UID:2026-11-17-elektrus-opvasker-en@skaljegtaendemaskinen
+DTSTAMP:20261118T192426Z
+DTSTART:20261118T021500Z
+DTEND:20261118T051500Z
 SUMMARY:Turn on the dishwasher
-DESCRIPTION:Cheapest 3 hours: 02:30–05:30.\nSaves 0.64 kr compared to sta
- rting at 7 pm.\nIf the machine has delay start\, set it to start at 02:30.
+DESCRIPTION:Cheapest 3 hours: 03:15–06:15.\nSaves 1.09 kr compared to sta
+ rting at 7 pm.\nIf the machine has delay start\, set it to start at 03:15.
  \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
  markup).
 URL:https://www.skaljegtaendemaskinen.fun/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-17-elektrus-opvasker-en@skaljegtaendemaskinen
-DTSTAMP:20261117T200347Z
-DTSTART:20261118T021500Z
-DTEND:20261118T051500Z
+UID:2026-11-18-elektrus-opvasker-en@skaljegtaendemaskinen
+DTSTAMP:20261118T192426Z
+DTSTART:20261118T230000Z
+DTEND:20261119T020000Z
 SUMMARY:Turn on the dishwasher
-DESCRIPTION:Cheapest 3 hours: 03:15–06:15.\nSaves 1.09 kr compared to sta
- rting at 7 pm.\nIf the machine has delay start\, set it to start at 03:15.
+DESCRIPTION:Cheapest 3 hours: 00:00–03:00.\nSaves 0.58 kr compared to sta
+ rting at 7 pm.\nIf the machine has delay start\, set it to start at 00:00.
  \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
  markup).
 URL:https://www.skaljegtaendemaskinen.fun/
