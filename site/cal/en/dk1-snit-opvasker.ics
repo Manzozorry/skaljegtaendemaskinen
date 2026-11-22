@@ -11,11 +11,11 @@ REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-11-21-dk1-snit-opvasker-en@skaljegtaendemaskinen
-DTSTAMP:20261122T183207Z
+DTSTAMP:20261122T184017Z
 DTSTART:20261122T004500Z
 DTEND:20261122T034500Z
 SUMMARY:Turn on the dishwasher
-DESCRIPTION:Cheapest 3 hours: 01:45–04:45.\nSaves 0.77 kr compared to sta
+DESCRIPTION:Cheapest 3 hours: 01:45–04:45.\nSaves 0.67 kr compared to sta
  rting at 7 pm.\nIf the machine has delay start\, set it to start at 01:45.
  \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
  markup).
@@ -24,11 +24,11 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-22-dk1-snit-opvasker-en@skaljegtaendemaskinen
-DTSTAMP:20261122T183207Z
+DTSTAMP:20261122T184017Z
 DTSTART:20261123T011500Z
 DTEND:20261123T041500Z
 SUMMARY:Turn on the dishwasher
-DESCRIPTION:Cheapest 3 hours: 02:15–05:15.\nSaves 0.86 kr compared to sta
+DESCRIPTION:Cheapest 3 hours: 02:15–05:15.\nSaves 0.76 kr compared to sta
  rting at 7 pm.\nIf the machine has delay start\, set it to start at 02:15.
  \nPrices include grid tariff\, taxes and VAT (excluding your supplier’s 
  markup).
