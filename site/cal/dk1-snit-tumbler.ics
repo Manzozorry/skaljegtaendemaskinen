@@ -11,11 +11,11 @@ REFRESH-INTERVAL;VALUE=DURATION:PT4H
 X-PUBLISHED-TTL:PT4H
 BEGIN:VEVENT
 UID:2026-11-22-dk1-snit-tumbler-da@skaljegtaendemaskinen
-DTSTAMP:20261123T224000Z
+DTSTAMP:20261123T225605Z
 DTSTART:20261123T014500Z
 DTEND:20261123T041500Z
 SUMMARY:Start tørretumbleren
-DESCRIPTION:Billigste 2.5 timer: 02:45–05:15.\nDet sparer 1\,38 kr. i for
+DESCRIPTION:Billigste 2.5 timer: 02:45–05:15.\nDet sparer 1\,29 kr. i for
  hold til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til 
  at gå i gang kl. 02:45.\nPriser inkl. nettarif\, afgifter og moms (ekskl.
   elselskabets tillæg).
@@ -24,11 +24,11 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-23-dk1-snit-tumbler-da@skaljegtaendemaskinen
-DTSTAMP:20261123T224000Z
+DTSTAMP:20261123T225605Z
 DTSTART:20261124T013000Z
 DTEND:20261124T040000Z
 SUMMARY:Start tørretumbleren
-DESCRIPTION:Billigste 2.5 timer: 02:30–05:00.\nDet sparer 2\,09 kr. i for
+DESCRIPTION:Billigste 2.5 timer: 02:30–05:00.\nDet sparer 1\,99 kr. i for
  hold til at starte kl. 19.\nHar maskinen udskudt start\, så sæt den til 
  at gå i gang kl. 02:30.\nPriser inkl. nettarif\, afgifter og moms (ekskl.
   elselskabets tillæg).

@@ -125,10 +125,10 @@
    "elbil": "2026-11-22"
   },
   "hammel": {
-   "opvasker": "2026-11-02",
-   "vask": "2026-11-02",
-   "tumbler": "2026-11-02",
-   "elbil": "2026-11-02"
+   "opvasker": "2026-11-23",
+   "vask": "2026-11-23",
+   "tumbler": "2026-11-23",
+   "elbil": "2026-11-23"
   },
   "kongerslev": {
    "opvasker": "2026-11-22",
@@ -149,10 +149,10 @@
    "elbil": "2026-11-22"
   },
   "midtfyns": {
-   "opvasker": "2026-11-22",
-   "vask": "2026-11-22",
-   "tumbler": "2026-11-22",
-   "elbil": "2026-11-22"
+   "opvasker": "2026-11-23",
+   "vask": "2026-11-23",
+   "tumbler": "2026-11-23",
+   "elbil": "2026-11-23"
   },
   "sunds": {
    "opvasker": "2026-11-18",
@@ -298,10 +298,10 @@
    "elbil": 672.1409
   },
   "hammel": {
-   "opvasker": 11.9446,
-   "vask": 11.7094,
-   "tumbler": 22.3658,
-   "elbil": 237.6447
+   "opvasker": 13.82,
+   "vask": 13.5242,
+   "tumbler": 25.8534,
+   "elbil": 274.698
   },
   "kongerslev": {
    "opvasker": 23.5437,
@@ -322,10 +322,10 @@
    "elbil": 331.3911
   },
   "midtfyns": {
-   "opvasker": 12.2104,
-   "vask": 11.9069,
-   "tumbler": 22.8206,
-   "elbil": 243.4641
+   "opvasker": 13.2531,
+   "vask": 12.8996,
+   "tumbler": 24.7558,
+   "elbil": 263.7042
   },
   "sunds": {
    "opvasker": 22.3967,
