@@ -44,10 +44,10 @@
    "elbil": "2026-11-02"
   },
   "trefor": {
-   "opvasker": "2026-11-15",
-   "vask": "2026-11-15",
-   "tumbler": "2026-11-15",
-   "elbil": "2026-11-15"
+   "opvasker": "2026-11-26",
+   "vask": "2026-11-26",
+   "tumbler": "2026-11-26",
+   "elbil": "2026-11-26"
   },
   "konstant": {
    "opvasker": "2026-11-26",
@@ -68,10 +68,10 @@
    "elbil": "2026-11-02"
   },
   "elnet-midt": {
-   "opvasker": "2026-11-15",
-   "vask": "2026-11-15",
-   "tumbler": "2026-11-15",
-   "elbil": "2026-11-15"
+   "opvasker": "2026-11-26",
+   "vask": "2026-11-26",
+   "tumbler": "2026-11-26",
+   "elbil": "2026-11-26"
   },
   "rah": {
    "opvasker": "2026-11-26",
@@ -217,10 +217,10 @@
    "elbil": 268.8158
   },
   "trefor": {
-   "opvasker": 14.1956,
-   "vask": 13.575,
-   "tumbler": 26.313,
-   "elbil": 286.7501
+   "opvasker": 16.055,
+   "vask": 15.3493,
+   "tumbler": 29.7647,
+   "elbil": 322.8296
   },
   "konstant": {
    "opvasker": 33.3949,
@@ -241,10 +241,10 @@
    "elbil": 251.8082
   },
   "elnet-midt": {
-   "opvasker": 18.3405,
-   "vask": 17.9401,
-   "tumbler": 34.1903,
-   "elbil": 365.4719
+   "opvasker": 20.7609,
+   "vask": 20.2964,
+   "tumbler": 38.7019,
+   "elbil": 412.98
   },
   "rah": {
    "opvasker": 36.966,
